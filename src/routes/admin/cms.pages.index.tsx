@@ -60,7 +60,7 @@ function PagesList() {
       const slug = slugify(t) || `page-${Date.now()}`;
       const { data, error } = await supabase
         .from("pages")
-        .insert({ title: t, slug, author_id: user!.id, body: "" })
+        .insert({ title: t, slug, author_id: user!.id, body: "" } as any)
         .select()
         .single();
       if (error) throw error;
@@ -93,7 +93,7 @@ function PagesList() {
           template: p.template,
           page_type: p.page_type,
           author_id: user!.id,
-        })
+        } as any)
         .select()
         .single();
       if (error) throw error;

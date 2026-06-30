@@ -253,7 +253,7 @@ function EditPage() {
           theme: p.theme as never,
           blocks: p.blocks as never,
           author_id: user!.id,
-        })
+        } as any)
         .select()
         .single();
       if (error) throw error;

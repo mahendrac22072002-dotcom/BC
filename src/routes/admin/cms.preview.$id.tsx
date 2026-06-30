@@ -32,7 +32,7 @@ function PreviewPage() {
   if (q.isPending) return <div className="p-12 text-sm text-slate-500">Loading preview…</div>;
   if (!q.data) return <div className="p-12 text-sm text-slate-500">Page not found.</div>;
 
-  const blocks = (useDraft ? (q.data.draft_blocks ?? q.data.blocks ?? []) : (q.data.blocks ?? [])) as PageBlock[];
+  const blocks = (useDraft ? (q.data.draft_blocks ?? q.data.blocks ?? []) : (q.data.blocks ?? [])) as unknown as PageBlock[];
   const theme = (q.data.theme as Record<string, string> | null) ?? {};
 
   // If there are no blocks but there is legacy body text, we can render it as a fallback

@@ -289,7 +289,7 @@ export function SupportInbox() {
 
   const counts = useMemo(() => {
     const c: Record<string, number> = { open: 0, pending: 0, resolved: 0, closed: 0, all: threads.length };
-    for (const t of threads) c[t.status] = (c[t.status] ?? 0) + 1;
+    for (const t of threads) c[t.status!] = (c[t.status!] ?? 0) + 1;
     return c;
   }, [threads]);
 

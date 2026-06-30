@@ -65,7 +65,7 @@ function About() {
           <h2 className="text-3xl font-bold mb-4">Join the verified network</h2>
           <p className="text-muted-foreground mb-8 text-lg">Stop chasing fake leads. Start closing real deals.</p>
           <div className="flex justify-center gap-4">
-            <Button asChild size="lg"><Link to="/auth?mode=signup">Create broker account</Link></Button>
+            <Link to="/auth" search={{ mode: "signup" }} className={buttonVariants({ size: "lg" })}>Create broker account</Link>
             <Button variant="outline" size="lg" asChild><Link to="/contact">Talk to sales</Link></Button>
           </div>
         </section>

@@ -25,7 +25,7 @@ export type Database = {
           lead_id: string | null
           owner_id: string
           subject: string
-          type: Database["public"]["Enums"]["activity_type"]
+          type: string
         }
         Insert: {
           body?: string | null
@@ -37,7 +37,7 @@ export type Database = {
           lead_id?: string | null
           owner_id: string
           subject: string
-          type: Database["public"]["Enums"]["activity_type"]
+          type: string
         }
         Update: {
           body?: string | null
@@ -49,18 +49,18 @@ export type Database = {
           lead_id?: string | null
           owner_id?: string
           subject?: string
-          type?: Database["public"]["Enums"]["activity_type"]
+          type?: string
         }
         Relationships: [
           {
-            foreignKeyName: "activities_deal_id_fkey"
+            foreignKeyName: "fk_activities_deal_id"
             columns: ["deal_id"]
             isOneToOne: false
             referencedRelation: "deals"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "activities_lead_id_fkey"
+            foreignKeyName: "fk_activities_lead_id"
             columns: ["lead_id"]
             isOneToOne: false
             referencedRelation: "leads"
@@ -176,14 +176,14 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "blog_post_tags_post_id_fkey"
+            foreignKeyName: "fk_blog_post_tags_post_id"
             columns: ["post_id"]
             isOneToOne: false
             referencedRelation: "blog_posts"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "blog_post_tags_tag_id_fkey"
+            foreignKeyName: "fk_blog_post_tags_tag_id"
             columns: ["tag_id"]
             isOneToOne: false
             referencedRelation: "blog_tags"
@@ -206,13 +206,13 @@ export type Database = {
           seo_description: string | null
           seo_title: string | null
           slug: string
-          status: Database["public"]["Enums"]["blog_status"]
+          status: string
           title: string
           updated_at: string
         }
         Insert: {
           author_id?: string | null
-          body?: string
+          body: string
           category_id?: string | null
           cover_url?: string | null
           created_at?: string
@@ -224,7 +224,7 @@ export type Database = {
           seo_description?: string | null
           seo_title?: string | null
           slug: string
-          status?: Database["public"]["Enums"]["blog_status"]
+          status?: string
           title: string
           updated_at?: string
         }
@@ -242,13 +242,13 @@ export type Database = {
           seo_description?: string | null
           seo_title?: string | null
           slug?: string
-          status?: Database["public"]["Enums"]["blog_status"]
+          status?: string
           title?: string
           updated_at?: string
         }
         Relationships: [
           {
-            foreignKeyName: "blog_posts_category_id_fkey"
+            foreignKeyName: "fk_blog_posts_category_id"
             columns: ["category_id"]
             isOneToOne: false
             referencedRelation: "blog_categories"
@@ -277,6 +277,62 @@ export type Database = {
         }
         Relationships: []
       }
+      broker_staff: {
+        Row: {
+          broker_id: string | null
+          created_at: string | null
+          id: string
+          role: string | null
+          user_id: string | null
+        }
+        Insert: {
+          broker_id?: string | null
+          created_at?: string | null
+          id?: string
+          role?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          broker_id?: string | null
+          created_at?: string | null
+          id?: string
+          role?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "broker_staff_broker_id_fkey"
+            columns: ["broker_id"]
+            isOneToOne: false
+            referencedRelation: "brokers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      brokers: {
+        Row: {
+          created_at: string | null
+          id: string
+          license_number: string | null
+          name: string
+          verified: boolean | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          license_number?: string | null
+          name: string
+          verified?: boolean | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          license_number?: string | null
+          name?: string
+          verified?: boolean | null
+        }
+        Relationships: []
+      }
       connections: {
         Row: {
           addressee_id: string
@@ -284,7 +340,7 @@ export type Database = {
           id: string
           message: string | null
           requester_id: string
-          status: Database["public"]["Enums"]["connection_status"]
+          status: string
           updated_at: string
         }
         Insert: {
@@ -293,7 +349,7 @@ export type Database = {
           id?: string
           message?: string | null
           requester_id: string
-          status?: Database["public"]["Enums"]["connection_status"]
+          status: string
           updated_at?: string
         }
         Update: {
@@ -302,8 +358,53 @@ export type Database = {
           id?: string
           message?: string | null
           requester_id?: string
-          status?: Database["public"]["Enums"]["connection_status"]
+          status?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      contact_submissions: {
+        Row: {
+          assigned_to: string | null
+          company: string | null
+          created_at: string | null
+          email: string
+          id: string
+          message: string
+          name: string
+          notes: string | null
+          phone: string | null
+          status: string
+          subject: string
+          updated_at: string | null
+        }
+        Insert: {
+          assigned_to?: string | null
+          company?: string | null
+          created_at?: string | null
+          email: string
+          id?: string
+          message: string
+          name: string
+          notes?: string | null
+          phone?: string | null
+          status?: string
+          subject: string
+          updated_at?: string | null
+        }
+        Update: {
+          assigned_to?: string | null
+          company?: string | null
+          created_at?: string | null
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          status?: string
+          subject?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -321,7 +422,7 @@ export type Database = {
           broker_b: string
           created_at?: string
           id?: string
-          last_message_at?: string
+          last_message_at: string
           listing_id?: string | null
         }
         Update: {
@@ -334,7 +435,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "conversations_listing_id_fkey"
+            foreignKeyName: "fk_conversations_listing_id"
             columns: ["listing_id"]
             isOneToOne: false
             referencedRelation: "listings"
@@ -342,13 +443,246 @@ export type Database = {
           },
         ]
       }
+      deal_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          room_id: string
+          sender_id: string | null
+        }
+        Insert: {
+          content?: string
+          created_at?: string
+          id?: string
+          room_id: string
+          sender_id?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          room_id?: string
+          sender_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deal_messages_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "deal_rooms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deal_messages_sender_id_fkey"
+            columns: ["sender_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      deal_requests: {
+        Row: {
+          commission_proposal: string | null
+          created_at: string
+          expected_closing_date: string | null
+          id: string
+          listing_broker_id: string | null
+          listing_id: string | null
+          message: string | null
+          notes: string | null
+          offer_price: number | null
+          property_id: string | null
+          request_id: string | null
+          requesting_broker_id: string | null
+          status: string
+        }
+        Insert: {
+          commission_proposal?: string | null
+          created_at?: string
+          expected_closing_date?: string | null
+          id?: string
+          listing_broker_id?: string | null
+          listing_id?: string | null
+          message?: string | null
+          notes?: string | null
+          offer_price?: number | null
+          property_id?: string | null
+          request_id?: string | null
+          requesting_broker_id?: string | null
+          status?: string
+        }
+        Update: {
+          commission_proposal?: string | null
+          created_at?: string
+          expected_closing_date?: string | null
+          id?: string
+          listing_broker_id?: string | null
+          listing_id?: string | null
+          message?: string | null
+          notes?: string | null
+          offer_price?: number | null
+          property_id?: string | null
+          request_id?: string | null
+          requesting_broker_id?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deal_requests_listing_broker_id_fkey"
+            columns: ["listing_broker_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deal_requests_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "listings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deal_requests_requesting_broker_id_fkey"
+            columns: ["requesting_broker_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      deal_room_members: {
+        Row: {
+          created_at: string | null
+          id: string
+          joined_at: string | null
+          listing_broker_id: string | null
+          requesting_broker_id: string | null
+          role: string | null
+          room_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          joined_at?: string | null
+          listing_broker_id?: string | null
+          requesting_broker_id?: string | null
+          role?: string | null
+          room_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          joined_at?: string | null
+          listing_broker_id?: string | null
+          requesting_broker_id?: string | null
+          role?: string | null
+          room_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deal_room_members_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "deal_rooms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deal_room_members_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      deal_rooms: {
+        Row: {
+          created_at: string
+          deal_id: string
+          id: string
+          property_id: string
+          request_id: string | null
+          status: string | null
+        }
+        Insert: {
+          created_at?: string
+          deal_id: string
+          id?: string
+          property_id: string
+          request_id?: string | null
+          status?: string | null
+        }
+        Update: {
+          created_at?: string
+          deal_id?: string
+          id?: string
+          property_id?: string
+          request_id?: string | null
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deal_rooms_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "listings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deal_rooms_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "deal_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_deal_rooms_deal_id"
+            columns: ["deal_id"]
+            isOneToOne: false
+            referencedRelation: "deals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      deal_timeline: {
+        Row: {
+          action: string
+          actor_id: string | null
+          created_at: string
+          details: Json | null
+          id: string
+          room_id: string
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json | null
+          id?: string
+          room_id: string
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json | null
+          id?: string
+          room_id?: string
+        }
+        Relationships: []
+      }
       deals: {
         Row: {
           created_at: string
           expected_close_date: string | null
           id: string
           lead_id: string | null
-          listing_id: string | null
+          listing_id: string
           notes: string | null
           owner_id: string
           probability: number | null
@@ -362,7 +696,7 @@ export type Database = {
           expected_close_date?: string | null
           id?: string
           lead_id?: string | null
-          listing_id?: string | null
+          listing_id: string
           notes?: string | null
           owner_id: string
           probability?: number | null
@@ -376,7 +710,7 @@ export type Database = {
           expected_close_date?: string | null
           id?: string
           lead_id?: string | null
-          listing_id?: string | null
+          listing_id?: string
           notes?: string | null
           owner_id?: string
           probability?: number | null
@@ -387,14 +721,14 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "deals_lead_id_fkey"
+            foreignKeyName: "fk_deals_lead_id"
             columns: ["lead_id"]
             isOneToOne: false
             referencedRelation: "leads"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "deals_listing_id_fkey"
+            foreignKeyName: "fk_deals_listing_id"
             columns: ["listing_id"]
             isOneToOne: false
             referencedRelation: "listings"
@@ -417,7 +751,7 @@ export type Database = {
           form_id: string
           id?: string
           ip_hash?: string | null
-          payload?: Json
+          payload: Json
           submitted_by?: string | null
           submitter_email?: string | null
         }
@@ -432,7 +766,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "form_submissions_form_id_fkey"
+            foreignKeyName: "fk_form_submissions_form_id"
             columns: ["form_id"]
             isOneToOne: false
             referencedRelation: "forms"
@@ -462,7 +796,7 @@ export type Database = {
           name: string
           notify_email?: string | null
           published?: boolean
-          schema?: Json
+          schema: Json
           slug: string
           success_message?: string
           updated_at?: string
@@ -485,42 +819,51 @@ export type Database = {
       kyc_documents: {
         Row: {
           broker_id: string
-          created_at: string
-          doc_type: Database["public"]["Enums"]["kyc_doc_type"]
+          created_at: string | null
+          doc_type: string | null
+          document_type: string
           file_path: string
           id: string
+          rejection_reason: string | null
           reviewed_at: string | null
           reviewer_id: string | null
           reviewer_notes: string | null
-          status: Database["public"]["Enums"]["kyc_doc_status"]
-          rejection_reason: string | null
-          version: number
+          status: string | null
+          uploaded_at: string | null
+          user_id: string | null
+          version: number | null
         }
         Insert: {
           broker_id: string
-          created_at?: string
-          doc_type: Database["public"]["Enums"]["kyc_doc_type"]
+          created_at?: string | null
+          doc_type?: string | null
+          document_type: string
           file_path: string
           id?: string
+          rejection_reason?: string | null
           reviewed_at?: string | null
           reviewer_id?: string | null
           reviewer_notes?: string | null
-          status?: Database["public"]["Enums"]["kyc_doc_status"]
-          rejection_reason?: string | null
-          version?: number
+          status?: string | null
+          uploaded_at?: string | null
+          user_id?: string | null
+          version?: number | null
         }
         Update: {
           broker_id?: string
-          created_at?: string
-          doc_type?: Database["public"]["Enums"]["kyc_doc_type"]
+          created_at?: string | null
+          doc_type?: string | null
+          document_type?: string
           file_path?: string
           id?: string
+          rejection_reason?: string | null
           reviewed_at?: string | null
           reviewer_id?: string | null
           reviewer_notes?: string | null
-          status?: Database["public"]["Enums"]["kyc_doc_status"]
-          rejection_reason?: string | null
-          version?: number
+          status?: string | null
+          uploaded_at?: string | null
+          user_id?: string | null
+          version?: number | null
         }
         Relationships: []
       }
@@ -575,6 +918,38 @@ export type Database = {
         }
         Relationships: []
       }
+      listing_images: {
+        Row: {
+          created_at: string | null
+          id: string
+          image_url: string
+          listing_id: string | null
+          position: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          image_url: string
+          listing_id?: string | null
+          position?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          image_url?: string
+          listing_id?: string | null
+          position?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "listing_images_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       listing_reports: {
         Row: {
           assigned_to: string | null
@@ -592,7 +967,7 @@ export type Database = {
         }
         Insert: {
           assigned_to?: string | null
-          attachments?: Json
+          attachments: Json
           created_at?: string
           description?: string | null
           id?: string
@@ -601,7 +976,7 @@ export type Database = {
           reporter_id: string
           resolution_notes?: string | null
           resolved_at?: string | null
-          status?: Database["public"]["Enums"]["listing_report_status"]
+          status: Database["public"]["Enums"]["listing_report_status"]
           updated_at?: string
         }
         Update: {
@@ -620,7 +995,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "listing_reports_listing_id_fkey"
+            foreignKeyName: "fk_listing_reports_listing_id"
             columns: ["listing_id"]
             isOneToOne: false
             referencedRelation: "listings"
@@ -634,7 +1009,7 @@ export type Database = {
           id: string
           listing_id: string
           moderator_id: string | null
-          new_status: Database["public"]["Enums"]["listing_moderation_status"]
+          new_status: string
           notes: string | null
           previous_status:
             | Database["public"]["Enums"]["listing_moderation_status"]
@@ -646,7 +1021,7 @@ export type Database = {
           id?: string
           listing_id: string
           moderator_id?: string | null
-          new_status: Database["public"]["Enums"]["listing_moderation_status"]
+          new_status: string
           notes?: string | null
           previous_status?:
             | Database["public"]["Enums"]["listing_moderation_status"]
@@ -658,7 +1033,7 @@ export type Database = {
           id?: string
           listing_id?: string
           moderator_id?: string | null
-          new_status?: Database["public"]["Enums"]["listing_moderation_status"]
+          new_status?: string
           notes?: string | null
           previous_status?:
             | Database["public"]["Enums"]["listing_moderation_status"]
@@ -667,7 +1042,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "listing_status_history_listing_id_fkey"
+            foreignKeyName: "fk_listing_status_history_listing_id"
             columns: ["listing_id"]
             isOneToOne: false
             referencedRelation: "listings"
@@ -681,65 +1056,88 @@ export type Database = {
           bathrooms: number | null
           bedrooms: number | null
           broker_id: string
-          city: string
+          city: string | null
           cover_image_url: string | null
-          created_at: string
+          created_at: string | null
           description: string | null
           featured_until: string | null
           id: string
-          listing_type: Database["public"]["Enums"]["listing_type"]
+          listing_broker_id: string | null
+          listing_type: string | null
           locality: string | null
           moderation_notes: string | null
-          moderation_status: Database["public"]["Enums"]["listing_moderation_status"]
+          moderation_status:
+            | Database["public"]["Enums"]["listing_moderation_status"]
+            | null
           price: number | null
-          property_type: Database["public"]["Enums"]["property_type"]
-          status: Database["public"]["Enums"]["listing_status"]
+          property_type: string | null
+          state: string | null
+          status: string | null
           title: string
-          updated_at: string
+          updated_at: string | null
+          zip: string | null
         }
         Insert: {
           area_sqft?: number | null
           bathrooms?: number | null
           bedrooms?: number | null
           broker_id: string
-          city: string
+          city?: string | null
           cover_image_url?: string | null
-          created_at?: string
+          created_at?: string | null
           description?: string | null
           featured_until?: string | null
           id?: string
-          listing_type?: Database["public"]["Enums"]["listing_type"]
+          listing_broker_id?: string | null
+          listing_type?: string | null
           locality?: string | null
           moderation_notes?: string | null
-          moderation_status?: Database["public"]["Enums"]["listing_moderation_status"]
+          moderation_status?:
+            | Database["public"]["Enums"]["listing_moderation_status"]
+            | null
           price?: number | null
-          property_type?: Database["public"]["Enums"]["property_type"]
-          status?: Database["public"]["Enums"]["listing_status"]
+          property_type?: string | null
+          state?: string | null
+          status?: string | null
           title: string
-          updated_at?: string
+          updated_at?: string | null
+          zip?: string | null
         }
         Update: {
           area_sqft?: number | null
           bathrooms?: number | null
           bedrooms?: number | null
           broker_id?: string
-          city?: string
+          city?: string | null
           cover_image_url?: string | null
-          created_at?: string
+          created_at?: string | null
           description?: string | null
           featured_until?: string | null
           id?: string
-          listing_type?: Database["public"]["Enums"]["listing_type"]
+          listing_broker_id?: string | null
+          listing_type?: string | null
           locality?: string | null
           moderation_notes?: string | null
-          moderation_status?: Database["public"]["Enums"]["listing_moderation_status"]
+          moderation_status?:
+            | Database["public"]["Enums"]["listing_moderation_status"]
+            | null
           price?: number | null
-          property_type?: Database["public"]["Enums"]["property_type"]
-          status?: Database["public"]["Enums"]["listing_status"]
+          property_type?: string | null
+          state?: string | null
+          status?: string | null
           title?: string
-          updated_at?: string
+          updated_at?: string | null
+          zip?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "listings_broker_id_fkey"
+            columns: ["broker_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       media_assets: {
         Row: {
@@ -764,7 +1162,7 @@ export type Database = {
           height?: number | null
           id?: string
           mime_type: string
-          size_bytes?: number
+          size_bytes: number
           storage_path: string
           updated_at?: string
           uploaded_by?: string | null
@@ -810,7 +1208,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "messages_conversation_id_fkey"
+            foreignKeyName: "fk_messages_conversation_id"
             columns: ["conversation_id"]
             isOneToOne: false
             referencedRelation: "conversations"
@@ -824,7 +1222,7 @@ export type Database = {
           href: string
           id: string
           label: string
-          location: Database["public"]["Enums"]["nav_location"]
+          location: string
           open_in_new_tab: boolean
           parent_id: string | null
           position: number
@@ -836,10 +1234,10 @@ export type Database = {
           href: string
           id?: string
           label: string
-          location?: Database["public"]["Enums"]["nav_location"]
+          location: string
           open_in_new_tab?: boolean
           parent_id?: string | null
-          position?: number
+          position: number
           updated_at?: string
           visible?: boolean
         }
@@ -848,7 +1246,7 @@ export type Database = {
           href?: string
           id?: string
           label?: string
-          location?: Database["public"]["Enums"]["nav_location"]
+          location?: string
           open_in_new_tab?: boolean
           parent_id?: string | null
           position?: number
@@ -857,7 +1255,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "nav_items_parent_id_fkey"
+            foreignKeyName: "fk_nav_items_parent_id"
             columns: ["parent_id"]
             isOneToOne: false
             referencedRelation: "nav_items"
@@ -868,36 +1266,42 @@ export type Database = {
       notifications: {
         Row: {
           body: string | null
-          created_at: string
+          created_at: string | null
           id: string
-          kind: Database["public"]["Enums"]["notification_kind"]
+          kind: Database["public"]["Enums"]["notification_kind"] | null
           link: string | null
-          metadata: Json
+          message: string | null
+          metadata: Json | null
+          read: boolean | null
           read_at: string | null
           title: string
-          user_id: string
+          user_id: string | null
         }
         Insert: {
           body?: string | null
-          created_at?: string
+          created_at?: string | null
           id?: string
-          kind: Database["public"]["Enums"]["notification_kind"]
+          kind?: Database["public"]["Enums"]["notification_kind"] | null
           link?: string | null
-          metadata?: Json
+          message?: string | null
+          metadata?: Json | null
+          read?: boolean | null
           read_at?: string | null
           title: string
-          user_id: string
+          user_id?: string | null
         }
         Update: {
           body?: string | null
-          created_at?: string
+          created_at?: string | null
           id?: string
-          kind?: Database["public"]["Enums"]["notification_kind"]
+          kind?: Database["public"]["Enums"]["notification_kind"] | null
           link?: string | null
-          metadata?: Json
+          message?: string | null
+          metadata?: Json | null
+          read?: boolean | null
           read_at?: string | null
           title?: string
-          user_id?: string
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -928,7 +1332,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "page_revisions_page_id_fkey"
+            foreignKeyName: "fk_page_revisions_page_id"
             columns: ["page_id"]
             isOneToOne: false
             referencedRelation: "pages"
@@ -950,8 +1354,8 @@ export type Database = {
           created_at?: string
           id?: string
           page_id: string
-          position?: number
-          props?: Json
+          position: number
+          props: Json
           section_type: string
           updated_at?: string
         }
@@ -966,7 +1370,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "page_sections_page_id_fkey"
+            foreignKeyName: "fk_page_sections_page_id"
             columns: ["page_id"]
             isOneToOne: false
             referencedRelation: "pages"
@@ -1000,7 +1404,7 @@ export type Database = {
           show_in_footer: boolean
           show_in_nav: boolean
           slug: string
-          status: Database["public"]["Enums"]["page_status"]
+          status: string
           template: string
           theme: Json
           title: string
@@ -1010,7 +1414,7 @@ export type Database = {
         }
         Insert: {
           author_id?: string | null
-          blocks?: Json
+          blocks: Json
           body?: string | null
           canonical_url?: string | null
           created_at?: string
@@ -1022,7 +1426,7 @@ export type Database = {
           keywords?: string | null
           nav_order?: number
           og_image?: string | null
-          page_type?: string
+          page_type: string
           parent_id?: string | null
           published_at?: string | null
           robots?: string
@@ -1033,13 +1437,13 @@ export type Database = {
           show_in_footer?: boolean
           show_in_nav?: boolean
           slug: string
-          status?: Database["public"]["Enums"]["page_status"]
-          template?: string
-          theme?: Json
+          status?: string
+          template: string
+          theme: Json
           title: string
-          twitter_card?: string
+          twitter_card: string
           updated_at?: string
-          visibility?: string
+          visibility: string
         }
         Update: {
           author_id?: string | null
@@ -1066,7 +1470,7 @@ export type Database = {
           show_in_footer?: boolean
           show_in_nav?: boolean
           slug?: string
-          status?: Database["public"]["Enums"]["page_status"]
+          status?: string
           template?: string
           theme?: Json
           title?: string
@@ -1076,7 +1480,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "pages_parent_id_fkey"
+            foreignKeyName: "fk_pages_parent_id"
             columns: ["parent_id"]
             isOneToOne: false
             referencedRelation: "pages"
@@ -1112,59 +1516,68 @@ export type Database = {
         Row: {
           avatar_url: string | null
           city: string | null
+          company_name: string | null
           created_at: string
           firm: string | null
+          first_name: string | null
           full_name: string | null
           id: string
           internal_notes: string | null
-          kyc_status: Database["public"]["Enums"]["kyc_status"]
+          kyc_status: string | null
           kyc_submitted_at: string | null
-          onboarding_kyc_submitted: boolean
-          onboarding_listing_published: boolean
-          onboarding_network_started: boolean
-          onboarding_profile_completed: boolean
+          last_name: string | null
+          onboarding_kyc_submitted: boolean | null
+          onboarding_listing_published: boolean | null
+          onboarding_network_started: boolean | null
+          onboarding_profile_completed: boolean | null
           phone: string | null
           suspended_at: string | null
-          tags: string[]
-          updated_at: string
+          tags: Json | null
+          updated_at: string | null
         }
         Insert: {
           avatar_url?: string | null
           city?: string | null
+          company_name?: string | null
           created_at?: string
           firm?: string | null
+          first_name?: string | null
           full_name?: string | null
           id: string
           internal_notes?: string | null
-          kyc_status?: Database["public"]["Enums"]["kyc_status"]
+          kyc_status?: string | null
           kyc_submitted_at?: string | null
-          onboarding_kyc_submitted?: boolean
-          onboarding_listing_published?: boolean
-          onboarding_network_started?: boolean
-          onboarding_profile_completed?: boolean
+          last_name?: string | null
+          onboarding_kyc_submitted?: boolean | null
+          onboarding_listing_published?: boolean | null
+          onboarding_network_started?: boolean | null
+          onboarding_profile_completed?: boolean | null
           phone?: string | null
           suspended_at?: string | null
-          tags?: string[]
-          updated_at?: string
+          tags?: Json | null
+          updated_at?: string | null
         }
         Update: {
           avatar_url?: string | null
           city?: string | null
+          company_name?: string | null
           created_at?: string
           firm?: string | null
+          first_name?: string | null
           full_name?: string | null
           id?: string
           internal_notes?: string | null
-          kyc_status?: Database["public"]["Enums"]["kyc_status"]
+          kyc_status?: string | null
           kyc_submitted_at?: string | null
-          onboarding_kyc_submitted?: boolean
-          onboarding_listing_published?: boolean
-          onboarding_network_started?: boolean
-          onboarding_profile_completed?: boolean
+          last_name?: string | null
+          onboarding_kyc_submitted?: boolean | null
+          onboarding_listing_published?: boolean | null
+          onboarding_network_started?: boolean | null
+          onboarding_profile_completed?: boolean | null
           phone?: string | null
           suspended_at?: string | null
-          tags?: string[]
-          updated_at?: string
+          tags?: Json | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -1173,23 +1586,23 @@ export type Database = {
           created_at: string
           id: string
           permission_id: string
-          role: Database["public"]["Enums"]["app_role"]
+          role: string
         }
         Insert: {
           created_at?: string
           id?: string
           permission_id: string
-          role: Database["public"]["Enums"]["app_role"]
+          role: string
         }
         Update: {
           created_at?: string
           id?: string
           permission_id?: string
-          role?: Database["public"]["Enums"]["app_role"]
+          role?: string
         }
         Relationships: [
           {
-            foreignKeyName: "role_permissions_permission_id_fkey"
+            foreignKeyName: "fk_role_permissions_permission_id"
             columns: ["permission_id"]
             isOneToOne: false
             referencedRelation: "permissions"
@@ -1212,15 +1625,15 @@ export type Database = {
           updated_at: string
         }
         Insert: {
-          brand_name?: string
+          brand_name: string
           contact_phone?: string | null
           created_at?: string
           footer_html?: string | null
           id?: string
           seo_description?: string | null
           seo_title?: string | null
-          singleton?: boolean
-          social_links?: Json
+          singleton: boolean
+          social_links: Json
           support_email?: string | null
           updated_at?: string
         }
@@ -1236,113 +1649,154 @@ export type Database = {
           social_links?: Json
           support_email?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      staff_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: string
+          user_id?: string
         }
         Relationships: []
       }
       subscription_plans: {
         Row: {
-          code: string
-          created_at: string
-          description: string | null
-          features: Json
-          id: string
-          interval: string
-          is_active: boolean
-          listing_limit: number | null
-          name: string
-          price_inr: number
-          sort_order: number
-          updated_at: string
           badge: string | null
+          code: string | null
+          created_at: string | null
           cta_text: string | null
           cta_url: string | null
-          trial_days: number | null
-          stripe_product_id: string | null
-          razorpay_plan_id: string | null
+          description: string | null
+          features: Json | null
           highlighted: boolean | null
+          id: string
+          interval: string | null
+          is_active: boolean | null
+          listing_limit: number | null
+          name: string
+          price_inr: number | null
+          price_monthly: number
+          razorpay_plan_id: string | null
+          sort_order: number
+          stripe_product_id: string | null
+          trial_days: number | null
+          updated_at: string | null
         }
         Insert: {
-          code: string
-          created_at?: string
+          badge?: string | null
+          code?: string | null
+          created_at?: string | null
+          cta_text?: string | null
+          cta_url?: string | null
           description?: string | null
-          features?: Json
+          features?: Json | null
+          highlighted?: boolean | null
           id?: string
-          interval?: string
-          is_active?: boolean
+          interval?: string | null
+          is_active?: boolean | null
           listing_limit?: number | null
           name: string
-          price_inr?: number
-          sort_order?: number
-          updated_at?: string
-          badge?: string | null
-          cta_text?: string | null
-          cta_url?: string | null
-          trial_days?: number | null
-          stripe_product_id?: string | null
+          price_inr?: number | null
+          price_monthly?: number
           razorpay_plan_id?: string | null
-          highlighted?: boolean | null
+          sort_order?: number
+          stripe_product_id?: string | null
+          trial_days?: number | null
+          updated_at?: string | null
         }
         Update: {
-          code?: string
-          created_at?: string
-          description?: string | null
-          features?: Json
-          id?: string
-          interval?: string
-          is_active?: boolean
-          listing_limit?: number | null
-          name?: string
-          price_inr?: number
-          sort_order?: number
-          updated_at?: string
           badge?: string | null
+          code?: string | null
+          created_at?: string | null
           cta_text?: string | null
           cta_url?: string | null
-          trial_days?: number | null
-          stripe_product_id?: string | null
-          razorpay_plan_id?: string | null
+          description?: string | null
+          features?: Json | null
           highlighted?: boolean | null
+          id?: string
+          interval?: string | null
+          is_active?: boolean | null
+          listing_limit?: number | null
+          name?: string
+          price_inr?: number | null
+          price_monthly?: number
+          razorpay_plan_id?: string | null
+          sort_order?: number
+          stripe_product_id?: string | null
+          trial_days?: number | null
+          updated_at?: string | null
         }
         Relationships: []
       }
       subscriptions: {
         Row: {
+          broker_id: string | null
           canceled_at: string | null
-          created_at: string
+          created_at: string | null
           current_period_end: string | null
           external_ref: string | null
           id: string
-          plan_id: string
-          started_at: string
-          status: Database["public"]["Enums"]["subscription_status"]
-          updated_at: string
+          plan_id: string | null
+          started_at: string | null
+          status: string | null
+          updated_at: string | null
           user_id: string
         }
         Insert: {
+          broker_id?: string | null
           canceled_at?: string | null
-          created_at?: string
+          created_at?: string | null
           current_period_end?: string | null
           external_ref?: string | null
           id?: string
-          plan_id: string
-          started_at?: string
-          status?: Database["public"]["Enums"]["subscription_status"]
-          updated_at?: string
+          plan_id?: string | null
+          started_at?: string | null
+          status?: string | null
+          updated_at?: string | null
           user_id: string
         }
         Update: {
+          broker_id?: string | null
           canceled_at?: string | null
-          created_at?: string
+          created_at?: string | null
           current_period_end?: string | null
           external_ref?: string | null
           id?: string
-          plan_id?: string
-          started_at?: string
-          status?: Database["public"]["Enums"]["subscription_status"]
-          updated_at?: string
+          plan_id?: string | null
+          started_at?: string | null
+          status?: string | null
+          updated_at?: string | null
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "fk_subscriptions_plan_id"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "subscription_plans"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "subscriptions_broker_id_fkey"
+            columns: ["broker_id"]
+            isOneToOne: false
+            referencedRelation: "brokers"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "subscriptions_plan_id_fkey"
             columns: ["plan_id"]
@@ -1379,7 +1833,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "support_attachments_message_id_fkey"
+            foreignKeyName: "fk_support_attachments_message_id"
             columns: ["message_id"]
             isOneToOne: false
             referencedRelation: "support_messages"
@@ -1411,7 +1865,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "support_internal_notes_thread_id_fkey"
+            foreignKeyName: "fk_support_internal_notes_thread_id"
             columns: ["thread_id"]
             isOneToOne: false
             referencedRelation: "support_threads"
@@ -1426,13 +1880,15 @@ export type Database = {
           id: string
           sender_id: string
           thread_id: string
+          user_id: string | null
         }
         Insert: {
-          body: string
+          body?: string
           created_at?: string
           id?: string
           sender_id: string
           thread_id: string
+          user_id?: string | null
         }
         Update: {
           body?: string
@@ -1440,8 +1896,16 @@ export type Database = {
           id?: string
           sender_id?: string
           thread_id?: string
+          user_id?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "fk_support_messages_thread_id"
+            columns: ["thread_id"]
+            isOneToOne: false
+            referencedRelation: "support_threads"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "support_messages_thread_id_fkey"
             columns: ["thread_id"]
@@ -1455,58 +1919,61 @@ export type Database = {
         Row: {
           assigned_to: string | null
           closed_at: string | null
-          created_at: string
+          created_at: string | null
           id: string
-          last_message_at: string
+          last_message_at: string | null
           opener_id: string
-          priority: Database["public"]["Enums"]["support_priority"]
-          status: Database["public"]["Enums"]["support_status"]
+          priority: string
+          status: string
           subject: string
-          updated_at: string
+          updated_at: string | null
+          user_id: string | null
         }
         Insert: {
           assigned_to?: string | null
           closed_at?: string | null
-          created_at?: string
+          created_at?: string | null
           id?: string
-          last_message_at?: string
+          last_message_at?: string | null
           opener_id: string
-          priority?: Database["public"]["Enums"]["support_priority"]
-          status?: Database["public"]["Enums"]["support_status"]
+          priority?: string
+          status?: string
           subject: string
-          updated_at?: string
+          updated_at?: string | null
+          user_id?: string | null
         }
         Update: {
           assigned_to?: string | null
           closed_at?: string | null
-          created_at?: string
+          created_at?: string | null
           id?: string
-          last_message_at?: string
+          last_message_at?: string | null
           opener_id?: string
-          priority?: Database["public"]["Enums"]["support_priority"]
-          status?: Database["public"]["Enums"]["support_status"]
+          priority?: string
+          status?: string
           subject?: string
-          updated_at?: string
+          updated_at?: string | null
+          user_id?: string | null
         }
         Relationships: []
       }
       user_roles: {
         Row: {
-          created_at: string
+          created_at: string | null
           id: string
-          role: Database["public"]["Enums"]["app_role"]
+          role: string
           user_id: string
         }
         Insert: {
-          created_at?: string
+          created_at?: string | null
           id?: string
-          role: Database["public"]["Enums"]["app_role"]
+          role: string
           user_id: string
         }
         Update: {
-          created_at?: string
+          created_at?: string | null
           id?: string
-          role?: Database["public"]["Enums"]["app_role"]
+          role?: string
           user_id?: string
         }
         Relationships: []
@@ -1552,31 +2019,36 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      has_permission: {
-        Args: { _action: string; _resource: string }
-        Returns: boolean
-      }
+      is_admin: { Args: never; Returns: boolean }
+      is_staff: { Args: never; Returns: boolean }
     }
     Enums: {
-      activity_type:
-        | "call"
-        | "email"
-        | "meeting"
-        | "site_visit"
-        | "note"
-        | "task"
       app_role: "broker" | "staff" | "admin"
       blog_status: "draft" | "scheduled" | "published" | "archived"
-      connection_status: "pending" | "accepted" | "declined"
-      deal_stage:
+      connection_status:
+        | "pending"
+        | "accepted"
+        | "declined"
         | "prospect"
         | "site_visit"
         | "offer"
         | "agreement"
         | "closed_won"
         | "closed_lost"
-      kyc_doc_status: "uploaded" | "approved" | "rejected"
-      kyc_doc_type:
+      deal_stage:
+        | "prospect"
+        | "site_visit"
+        | "offer"
+        | "negotiation"
+        | "won"
+        | "lost"
+        | "agreement"
+        | "closed_won"
+        | "closed_lost"
+      kyc_doc_status:
+        | "uploaded"
+        | "approved"
+        | "rejected"
         | "aadhaar"
         | "pan"
         | "rera"
@@ -1585,7 +2057,33 @@ export type Database = {
         | "broker_photo"
         | "visiting_card"
         | "office_photo"
-      kyc_status: "pending" | "in_review" | "verified" | "rejected"
+      kyc_status:
+        | "pending"
+        | "in_review"
+        | "verified"
+        | "rejected"
+        | "website"
+        | "referral"
+        | "marketplace"
+        | "cold_call"
+        | "social"
+        | "event"
+        | "other"
+        | "new"
+        | "contacted"
+        | "qualified"
+        | "proposal"
+        | "negotiation"
+        | "won"
+        | "lost"
+        | "approved"
+        | "hidden"
+        | "changes_requested"
+        | "open"
+        | "assigned"
+        | "resolved"
+        | "dismissed"
+        | "escalated"
       lead_source:
         | "website"
         | "referral"
@@ -1606,18 +2104,20 @@ export type Database = {
         | "pending"
         | "approved"
         | "rejected"
-        | "hidden"
         | "changes_requested"
+        | "hidden"
       listing_report_status:
         | "open"
-        | "assigned"
         | "resolved"
         | "dismissed"
+        | "pending"
+        | "assigned"
         | "escalated"
       listing_status: "draft" | "active" | "closed"
       listing_type: "sale" | "rent" | "lease"
-      nav_location: "header" | "footer"
-      notification_kind:
+      nav_location:
+        | "header"
+        | "footer"
         | "kyc_approved"
         | "kyc_rejected"
         | "listing_approved"
@@ -1628,8 +2128,22 @@ export type Database = {
         | "subscription_expiring"
         | "system_announcement"
         | "report_update"
-      page_status: "draft" | "published" | "scheduled" | "archived"
-      property_type:
+      notification_kind:
+        | "listing_approved"
+        | "listing_rejected"
+        | "listing_hidden"
+        | "listing_featured"
+        | "kyc_approved"
+        | "kyc_rejected"
+        | "support_reply"
+        | "subscription_expiring"
+        | "system_announcement"
+        | "report_update"
+      page_status:
+        | "draft"
+        | "published"
+        | "scheduled"
+        | "archived"
         | "apartment"
         | "villa"
         | "plot"
@@ -1638,12 +2152,12 @@ export type Database = {
         | "retail"
         | "warehouse"
         | "other"
-      subscription_status:
         | "trialing"
         | "active"
         | "past_due"
         | "canceled"
         | "expired"
+      page_visibility: "public" | "private" | "authenticated"
       support_priority: "low" | "normal" | "high" | "urgent"
       support_status: "open" | "pending" | "resolved" | "closed"
     }
@@ -1773,11 +2287,12 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      activity_type: ["call", "email", "meeting", "site_visit", "note", "task"],
       app_role: ["broker", "staff", "admin"],
       blog_status: ["draft", "scheduled", "published", "archived"],
-      connection_status: ["pending", "accepted", "declined"],
-      deal_stage: [
+      connection_status: [
+        "pending",
+        "accepted",
+        "declined",
         "prospect",
         "site_visit",
         "offer",
@@ -1785,8 +2300,21 @@ export const Constants = {
         "closed_won",
         "closed_lost",
       ],
-      kyc_doc_status: ["uploaded", "approved", "rejected"],
-      kyc_doc_type: [
+      deal_stage: [
+        "prospect",
+        "site_visit",
+        "offer",
+        "negotiation",
+        "won",
+        "lost",
+        "agreement",
+        "closed_won",
+        "closed_lost",
+      ],
+      kyc_doc_status: [
+        "uploaded",
+        "approved",
+        "rejected",
         "aadhaar",
         "pan",
         "rera",
@@ -1796,7 +2324,34 @@ export const Constants = {
         "visiting_card",
         "office_photo",
       ],
-      kyc_status: ["pending", "in_review", "verified", "rejected"],
+      kyc_status: [
+        "pending",
+        "in_review",
+        "verified",
+        "rejected",
+        "website",
+        "referral",
+        "marketplace",
+        "cold_call",
+        "social",
+        "event",
+        "other",
+        "new",
+        "contacted",
+        "qualified",
+        "proposal",
+        "negotiation",
+        "won",
+        "lost",
+        "approved",
+        "hidden",
+        "changes_requested",
+        "open",
+        "assigned",
+        "resolved",
+        "dismissed",
+        "escalated",
+      ],
       lead_source: [
         "website",
         "referral",
@@ -1819,20 +2374,22 @@ export const Constants = {
         "pending",
         "approved",
         "rejected",
-        "hidden",
         "changes_requested",
+        "hidden",
       ],
       listing_report_status: [
         "open",
-        "assigned",
         "resolved",
         "dismissed",
+        "pending",
+        "assigned",
         "escalated",
       ],
       listing_status: ["draft", "active", "closed"],
       listing_type: ["sale", "rent", "lease"],
-      nav_location: ["header", "footer"],
-      notification_kind: [
+      nav_location: [
+        "header",
+        "footer",
         "kyc_approved",
         "kyc_rejected",
         "listing_approved",
@@ -1844,8 +2401,23 @@ export const Constants = {
         "system_announcement",
         "report_update",
       ],
-      page_status: ["draft", "published", "scheduled", "archived"],
-      property_type: [
+      notification_kind: [
+        "listing_approved",
+        "listing_rejected",
+        "listing_hidden",
+        "listing_featured",
+        "kyc_approved",
+        "kyc_rejected",
+        "support_reply",
+        "subscription_expiring",
+        "system_announcement",
+        "report_update",
+      ],
+      page_status: [
+        "draft",
+        "published",
+        "scheduled",
+        "archived",
         "apartment",
         "villa",
         "plot",
@@ -1854,14 +2426,13 @@ export const Constants = {
         "retail",
         "warehouse",
         "other",
-      ],
-      subscription_status: [
         "trialing",
         "active",
         "past_due",
         "canceled",
         "expired",
       ],
+      page_visibility: ["public", "private", "authenticated"],
       support_priority: ["low", "normal", "high", "urgent"],
       support_status: ["open", "pending", "resolved", "closed"],
     },

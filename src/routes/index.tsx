@@ -27,7 +27,7 @@ function Home() {
             BrokersConnect is India's first KYC-verified marketplace built for brokers, not buyers. List authentic inventory, collaborate on deals, and grow a trusted network — all in one place.
           </p>
           <div className="flex justify-center gap-4">
-            <Button asChild size="lg"><Link to="/auth?mode=signup">Get verified</Link></Button>
+            <Button asChild size="lg"><Link to="/auth" search={{ mode: "signup" }}>Get verified</Link></Button>
             <Button variant="outline" size="lg" asChild><Link to="/pricing">View pricing</Link></Button>
           </div>
         </section>
