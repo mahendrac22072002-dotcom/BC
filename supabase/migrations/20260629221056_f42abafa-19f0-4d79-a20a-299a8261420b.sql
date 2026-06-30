@@ -1,0 +1,1 @@
+UPDATE public.pages SET status='draft' WHERE slug='subscription';
