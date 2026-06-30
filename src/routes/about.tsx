@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — BrokersConnect" },
-      { name: "description", content: "We're building the trust layer for Indian real estate." },
-      { property: "og:title", content: "About — BrokersConnect" },
+      { title: "About BrokersConnect" },
+      { name: "description", content: "Learn about BrokersConnect, India's trusted broker collaboration platform." },
+      { property: "og:title", content: "About BrokersConnect" },
     ],
   }),
   component: About,
@@ -18,55 +18,59 @@ function About() {
     <SiteLayout>
       <div className="container-tight py-16 md:py-24">
         {/* Hero */}
-        <section className="text-center mb-24">
-          <p className="text-sm font-semibold uppercase tracking-widest text-primary mb-4">About</p>
+        <section className="text-center mb-16">
+          <p className="text-sm font-semibold uppercase tracking-widest text-primary mb-4">About Us</p>
           <h1 className="text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl mb-6">
-            We're building the trust layer for Indian real estate.
+            The Trust Layer for Indian Real Estate
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            BrokersConnect is a B2B platform built exclusively for real estate brokers. We verify professionals through KYC, moderate every listing, and give brokers the tools they need to collaborate on real deals.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            BrokersConnect is India's first B2B platform built exclusively for professional real estate brokers. We combine KYC verification, authentic inventory, and deal collaboration tools into a single trusted network.
           </p>
-        </section>
-
-        {/* Mission */}
-        <section className="mb-24">
-          <p className="text-sm font-semibold uppercase tracking-widest text-primary mb-4 text-center">Mission</p>
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-center mb-8">
-            Every broker verified. Every listing authentic. Every connection genuine.
-          </h2>
-          <div className="prose prose-neutral mx-auto text-muted-foreground text-lg">
-            <p>India's real estate market runs on relationships — and yet, brokers are forced to operate through fragmented WhatsApp groups, paid lead portals built for buyers, and unverified listings copy-pasted across the internet.</p>
-            <p>We think professionals deserve a platform of their own. One where the person on the other side of the deal is real, the inventory is genuine, and the tools actually fit the way deals happen.</p>
-            <p>BrokersConnect is built around three non-negotiables: <strong>verification before access</strong>, <strong>moderation before publication</strong>, and <strong>transparency in every interaction</strong>.</p>
+          <div className="mt-8 flex justify-center gap-4">
+            <Link to="/auth" search={{ mode: "signup" }} className={buttonVariants({ size: "lg" })}>
+              Join the Network
+            </Link>
+            <Link to="/blog/$slug" params={{ slug: "why-brokersconnect-exists" }} className={buttonVariants({ variant: "outline", size: "lg" })}>
+              Read Our Story
+            </Link>
           </div>
         </section>
 
-        {/* Principles */}
-        <section className="mb-24">
-          <p className="text-sm font-semibold uppercase tracking-widest text-primary mb-4 text-center">Principles</p>
-          <div className="grid gap-8 md:grid-cols-3 mt-12">
-            <div className="bg-card p-8 rounded-xl border border-hairline">
-              <h3 className="text-xl font-bold mb-3">Trust is the product</h3>
-              <p className="text-muted-foreground">We'd rather grow slowly with verified brokers than quickly with anonymous ones.</p>
-            </div>
-            <div className="bg-card p-8 rounded-xl border border-hairline">
-              <h3 className="text-xl font-bold mb-3">Professional, not promotional</h3>
-              <p className="text-muted-foreground">No flashy buyer ads. No vanity metrics. Tools that respect your time.</p>
-            </div>
-            <div className="bg-card p-8 rounded-xl border border-hairline">
-              <h3 className="text-xl font-bold mb-3">Built in India, for India</h3>
-              <p className="text-muted-foreground">RERA-aware, GST-aware, and tuned to how Indian deals actually close.</p>
-            </div>
+        {/* Mission & Vision */}
+        <section className="mb-24 grid md:grid-cols-2 gap-12">
+          <div className="bg-card p-8 rounded-2xl border border-hairline shadow-sm">
+            <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
+            <p className="text-muted-foreground text-lg leading-relaxed">
+              To eliminate fake leads and unverified inventory by building a secure, exclusive ecosystem where serious real estate professionals can collaborate and close deals with confidence.
+            </p>
+          </div>
+          <div className="bg-card p-8 rounded-2xl border border-hairline shadow-sm">
+            <h2 className="text-2xl font-bold mb-4">Our Vision</h2>
+            <p className="text-muted-foreground text-lg leading-relaxed">
+              To become the standard operating system for India's real estate brokers, where every genuine transaction originates from a trusted, verified connection.
+            </p>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="bg-primary/5 border border-primary/10 rounded-3xl p-12 text-center">
-          <h2 className="text-3xl font-bold mb-4">Join the verified network</h2>
-          <p className="text-muted-foreground mb-8 text-lg">Stop chasing fake leads. Start closing real deals.</p>
-          <div className="flex justify-center gap-4">
-            <Link to="/auth" search={{ mode: "signup" }} className={buttonVariants({ size: "lg" })}>Create broker account</Link>
-            <Button variant="outline" size="lg" asChild><Link to="/contact">Talk to sales</Link></Button>
+        {/* Values */}
+        <section className="mb-24">
+          <h2 className="text-3xl font-bold tracking-tight text-center mb-12">Our Core Values</h2>
+          <div className="grid gap-8 md:grid-cols-3">
+            <div className="text-center">
+              <div className="mx-auto w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-4 text-xl font-bold">1</div>
+              <h3 className="text-xl font-bold mb-2">Verification First</h3>
+              <p className="text-muted-foreground">Access is restricted to professionals who pass rigorous identity, PAN, and RERA checks.</p>
+            </div>
+            <div className="text-center">
+              <div className="mx-auto w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-4 text-xl font-bold">2</div>
+              <h3 className="text-xl font-bold mb-2">Authentic Inventory</h3>
+              <p className="text-muted-foreground">Every listing is moderated for accuracy, eliminating duplicates and ghost properties.</p>
+            </div>
+            <div className="text-center">
+              <div className="mx-auto w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-4 text-xl font-bold">3</div>
+              <h3 className="text-xl font-bold mb-2">Professional Respect</h3>
+              <p className="text-muted-foreground">We build tools that respect a broker's time, protecting their leads and direct relationships.</p>
+            </div>
           </div>
         </section>
       </div>

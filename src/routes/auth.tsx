@@ -139,7 +139,6 @@ function AuthPage() {
           }}
         />
         <div className="relative flex h-full flex-col justify-between p-12">
-          <div className="eyebrow text-background/60">Real Estate. Simplified.</div>
           <div>
             <h2 className="text-5xl font-extrabold leading-[1.05] tracking-tight">
               Join India's only

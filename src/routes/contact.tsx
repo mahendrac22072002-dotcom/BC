@@ -72,7 +72,7 @@ function Contact() {
                 </div>
                 <h3 className="font-bold">Email us</h3>
                 <p className="mt-1 text-sm text-muted-foreground">We usually respond within 24 hours.</p>
-                <a href="mailto:ravinderkumar@brokersconnect.space" className="mt-4 block font-medium hover:text-primary transition-colors">
+                <a href="mailto:ravinderkumar@brokersconnect.space" className="mt-4 block font-medium hover:text-primary transition-colors break-all">
                   ravinderkumar@brokersconnect.space
                 </a>
               </div>

@@ -33,7 +33,8 @@ export function SiteFooter() {
           <div>
             <Logo />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              India's verified marketplace for real estate brokers. Authentic listings, trusted connections, simplified deals.
+              India's verified marketplace for real estate brokers. Authentic listings, trusted
+              connections, simplified deals.
             </p>
           </div>
           {cols.map((col) => (
@@ -57,10 +58,23 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-hairline pt-8 md:flex-row md:items-center">
-          <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} BrokersConnect. Real Estate. Simplified.
-          </p>
+        <div className="mt-16 flex flex-col items-start justify-between gap-6 border-t border-hairline pt-8 md:flex-row md:items-start">
+          <div className="flex flex-col gap-2">
+            <p className="text-xs text-muted-foreground">
+              © {new Date().getFullYear()} BrokersConnect.
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Designed & Developed by{" "}
+              <a
+                href="https://aurixdevelopment.in/?utm_source=chatgpt.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-foreground hover:underline"
+              >
+                Aurix Development
+              </a>
+            </p>
+          </div>
           <p className="text-xs text-muted-foreground">Made for brokers, in India.</p>
         </div>
       </div>

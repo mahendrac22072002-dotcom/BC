@@ -19,16 +19,16 @@ function Home() {
       <div className="container-tight py-16 md:py-24">
         {/* Hero */}
         <section className="text-center mb-24">
-          <p className="text-sm font-semibold uppercase tracking-widest text-primary mb-4">For verified real estate brokers only</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-primary mb-4">For professional real estate brokers</p>
           <h1 className="text-5xl font-extrabold tracking-tight md:text-6xl lg:text-7xl mb-6">
             The broker network that actually connects.
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-            BrokersConnect is India's first KYC-verified marketplace built for brokers, not buyers. List authentic inventory, collaborate on deals, and grow a trusted network — all in one place.
+            Connect with genuine brokers, discover authentic inventory, collaborate on deals, and turn more opportunities into successful closings.
           </p>
           <div className="flex justify-center gap-4">
-            <Button asChild size="lg"><Link to="/auth" search={{ mode: "signup" }}>Get verified</Link></Button>
-            <Button variant="outline" size="lg" asChild><Link to="/pricing">View pricing</Link></Button>
+            <Button asChild size="lg"><Link to="/auth" search={{ mode: "signup" }}>Join BrokersConnect</Link></Button>
+            <Button variant="outline" size="lg" asChild><Link to="/pricing">View Pricing</Link></Button>
           </div>
         </section>
 
@@ -98,7 +98,7 @@ function Home() {
             </div>
             
             <div className="text-center mt-8">
-              <Button size="lg" asChild><Link to="/auth?mode=signup">Start your verification</Link></Button>
+              <Button size="lg" asChild><Link to="/auth" search={{ mode: "signup" }}>Start your verification</Link></Button>
             </div>
           </div>
         </section>
@@ -130,7 +130,7 @@ function Home() {
           <h2 className="text-3xl font-bold mb-4">Stop chasing fake leads. Start closing real deals.</h2>
           <p className="text-muted-foreground mb-8 text-lg max-w-2xl mx-auto">Join the broker-only network India's professionals have been waiting for.</p>
           <div className="flex justify-center gap-4">
-            <Button asChild size="lg"><Link to="/auth?mode=signup">Create broker account</Link></Button>
+            <Button asChild size="lg"><Link to="/auth" search={{ mode: "signup" }}>Create broker account</Link></Button>
             <Button variant="ghost" size="lg" asChild><Link to="/contact">Talk to sales &rarr;</Link></Button>
           </div>
         </section>

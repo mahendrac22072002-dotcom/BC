@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { relativeTime } from "@/lib/format";
 import { ArrowUpRight } from "lucide-react";
 
-export const Route = createFileRoute("/blog")({
+export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
       { title: "Blog — BrokersConnect" },
