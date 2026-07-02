@@ -333,17 +333,23 @@ function EditPage() {
     });
   }
 
-  async function uploadImage(file: File) {
-    const path = `cms/${id}/${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
-    const { error } = await supabase.storage.from("media").upload(path, file, { upsert: false });
-    if (error) {
-      toast.error(error.message);
-      return;
-    }
-    const { data } = await supabase.storage.from("media").createSignedUrl(path, 60 * 60 * 24 * 365);
-    if (data?.signedUrl) {
-      insertAtCursor(`![${file.name}](${data.signedUrl})`);
-      toast.success("Image inserted");
+  async function handleImageUpload(file: File) {
+    try {
+      const { uploadImage: uploadUtility } = await import("@/lib/imageUpload");
+      const { path } = await uploadUtility({
+        bucket: "media",
+        file,
+        category: "cms",
+        folder: `cms/${id}`,
+        upsert: false
+      });
+      const { data } = await supabase.storage.from("media").createSignedUrl(path, 60 * 60 * 24 * 365);
+      if (data?.signedUrl) {
+        insertAtCursor(`![${file.name}](${data.signedUrl})`);
+        toast.success("Image inserted");
+      }
+    } catch (e: any) {
+      toast.error(e.message || "Failed to upload image");
     }
   }
 

@@ -249,13 +249,15 @@ function ListingDialog({ onClose }: { onClose: () => void }) {
       if (error) throw error;
 
       if (file) {
-        const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
-        const path = `${user.id}/${inserted.id}/cover.${ext}`;
-        const up = await supabase.storage.from("listings").upload(path, file, {
-          upsert: true,
-          contentType: file.type,
+        const { uploadImage } = await import("@/lib/imageUpload");
+        const { path } = await uploadImage({
+          bucket: "listings",
+          file,
+          category: "listing",
+          folder: `${user.id}/${inserted.id}`,
+          fileName: "cover",
+          upsert: true
         });
-        if (up.error) throw up.error;
         await supabase.from("listings").update({ cover_image_url: path }).eq("id", inserted.id);
       }
 

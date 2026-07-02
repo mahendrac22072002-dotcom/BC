@@ -187,7 +187,7 @@ function MarketplacePage() {
               body="Your own listings are hidden from the marketplace."
             >
               <Button asChild>
-                <Link to="/inventory">View My Listings</Link>
+                <Link to="/listings">View My Listings</Link>
               </Button>
             </EmptyState>
           ) : (

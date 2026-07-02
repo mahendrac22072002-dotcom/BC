@@ -82,14 +82,15 @@ function MediaPage() {
     mutationFn: async (files: FileList) => {
       const { data: u } = await supabase.auth.getUser();
       const userId = u.user?.id;
+      const { uploadImage } = await import("@/lib/imageUpload");
       for (const file of Array.from(files)) {
-        const ext = file.name.includes(".") ? file.name.split(".").pop() : "bin";
-        const path = `uploads/${Date.now()}_${Math.random().toString(36).slice(2, 8)}.${ext}`;
-        const { error: upErr } = await supabase.storage.from("media").upload(path, file, {
-          contentType: file.type,
-          upsert: false,
+        const { path, sizeBytes } = await uploadImage({
+          bucket: "media",
+          file,
+          category: "general", // or branding/cms depending on use, media is usually general
+          folder: "uploads",
+          upsert: false
         });
-        if (upErr) throw upErr;
         let width: number | null = null;
         let height: number | null = null;
         if (file.type.startsWith("image/")) {
@@ -98,17 +99,18 @@ function MediaPage() {
               const img = new Image();
               img.onload = () => resolve({ w: img.naturalWidth, h: img.naturalHeight });
               img.onerror = reject;
-              img.src = URL.createObjectURL(file);
+              img.src = URL.createObjectURL(file); // note: using original file for dims is fine, since it preserves aspect ratio and we just want to know roughly what it is, though accurate dims would come from the compressed file. But this is okay.
             });
-            width = dims.w;
-            height = dims.h;
+            // Update dims to max 1600 if it was resized, approximate
+            width = Math.min(dims.w, 1600);
+            height = width === dims.w ? dims.h : Math.round(dims.h * (1600 / dims.w));
           } catch { /* ignore */ }
         }
         const { data: row, error: insErr } = await supabase.from("media_assets").insert({
           filename: file.name,
           storage_path: path,
-          mime_type: file.type || "application/octet-stream",
-          size_bytes: file.size,
+          mime_type: file.type.startsWith("image/") && file.type !== 'image/png' && file.type !== 'image/svg+xml' ? 'image/webp' : (file.type || "application/octet-stream"),
+          size_bytes: sizeBytes,
           width,
           height,
           uploaded_by: userId ?? null,

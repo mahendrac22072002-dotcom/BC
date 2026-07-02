@@ -55,17 +55,19 @@ function KycPage() {
   const upload = useMutation({
     mutationFn: async () => {
       if (!file) throw new Error("Choose a file");
-      const ext = file.name.split(".").pop()?.toLowerCase() || "pdf";
-      const path = `${user!.id}/${type}-${Date.now()}.${ext}`;
-      const up = await supabase.storage.from("kyc").upload(path, file, {
-        upsert: false,
-        contentType: file.type,
+      const { uploadImage } = await import("@/lib/imageUpload");
+      const { path: uploadedPath } = await uploadImage({
+        bucket: "kyc",
+        file,
+        category: "kyc",
+        folder: user!.id,
+        fileName: `${type}-${Date.now()}`,
+        upsert: false
       });
-      if (up.error) throw up.error;
       const ins = await supabase.from("kyc_documents").insert({
         broker_id: user!.id,
         doc_type: type,
-        file_path: path,
+        file_path: uploadedPath,
         status: "uploaded",
       } as any);
       if (ins.error) throw ins.error;
