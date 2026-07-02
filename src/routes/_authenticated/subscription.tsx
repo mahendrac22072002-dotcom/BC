@@ -142,9 +142,9 @@ function SubscriptionPage() {
               <p className="mt-1 text-sm text-muted-foreground">{p.description}</p>
               <div className="mt-6 flex items-end gap-1">
                 <span className="text-4xl font-extrabold tracking-tight">
-                  {p.price_inr === 0 ? "Free" : formatINR(p.price_inr)}
+                  {(p.price_inr || 0) === 0 ? "Free" : formatINR(p.price_inr || 0)}
                 </span>
-                {p.price_inr > 0 && <span className="pb-1.5 text-xs text-muted-foreground">/ {p.interval}</span>}
+                {(p.price_inr || 0) > 0 && <span className="pb-1.5 text-xs text-muted-foreground">/ {p.interval}</span>}
               </div>
               <ul className="mt-6 flex-1 space-y-2 text-sm">
                 {(Array.isArray(p.features) ? (p.features as string[]) : []).map((f) => (

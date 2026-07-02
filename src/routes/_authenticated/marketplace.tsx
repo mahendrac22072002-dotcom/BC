@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
@@ -13,8 +14,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { SignedImage } from "@/components/SignedImage";
-import { formatINR } from "@/lib/format";
-import type { Database } from "@/integrations/supabase/types";
+import { formatINR, errMessage } from "@/lib/format";
+import type { Database, ListingRow } from "@/types/database-compat";
 import { Building2, MapPin, Loader2 } from "lucide-react";
 import { DealRequestModal } from "@/components/deals/DealRequestModal";
 
@@ -23,9 +24,9 @@ export const Route = createFileRoute("/_authenticated/marketplace")({
   component: MarketplacePage,
 });
 
-type Listing = Database["public"]["Tables"]["listings"]["Row"];
-type PropertyType = Database["public"]["Enums"]["property_type"];
-type ListingType = Database["public"]["Enums"]["listing_type"];
+type Listing = ListingRow;
+type PropertyType = "apartment" | "villa" | "plot" | "commercial" | "office" | "retail" | "warehouse" | "other";
+type ListingType = "sale" | "rent" | "lease";
 
 const PROPERTY_TYPES: PropertyType[] = [
   "apartment", "villa", "plot", "commercial", "office", "retail", "warehouse", "other",
@@ -53,8 +54,11 @@ function MarketplacePage() {
       let q = supabase
         .from("listings")
         .select("*, broker:broker_id(full_name, firm, kyc_status)")
-        .eq("status", "active")
-        .neq("broker_id", user?.id || "00000000-0000-0000-0000-000000000000");
+        .eq("status", "active");
+        
+      if (!import.meta.env.VITE_SHOW_OWN_LISTINGS) {
+        q = q.neq("broker_id", user?.id || "00000000-0000-0000-0000-000000000000");
+      }
 
       if (city) q = q.ilike("city", `%${city}%`);
       if (locality) q = q.ilike("locality", `%${locality}%`);
@@ -178,7 +182,14 @@ function MarketplacePage() {
               Error fetching marketplace: {errMessage(error)}
             </div>
           ) : !data || data.length === 0 ? (
-            <EmptyState title="No properties found" body="Try adjusting your filters. Only active listings from other verified brokers will appear here." />
+            <EmptyState 
+              title="No listings from other brokers yet." 
+              body="Your own listings are hidden from the marketplace."
+            >
+              <Button asChild>
+                <Link to="/inventory">View My Listings</Link>
+              </Button>
+            </EmptyState>
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {data.map((l) => (
@@ -206,7 +217,7 @@ function MarketplacePage() {
                       <MapPin className="h-3 w-3" /> {l.locality ? `${l.locality}, ${l.city}` : l.city}
                     </p>
                     <p className="mt-1 mb-4 text-[11px] uppercase tracking-widest text-muted-foreground">
-                      {l.property_type} · {l.listing_type} {l.area_sqft ? `· ${l.area_sqft} sqft` : ''} · {new Date(l.created_at).toLocaleDateString()}
+                      {l.property_type} · {l.listing_type} {l.area_sqft ? `· ${l.area_sqft} sqft` : ''} · {l.created_at ? new Date(l.created_at).toLocaleDateString() : ''}
                     </p>
                     <div className="mt-auto pt-4 border-t border-hairline">
                       <DealRequestModal listing={l} requestingBrokerId={user.id} />
@@ -222,12 +233,13 @@ function MarketplacePage() {
   );
 }
 
-function EmptyState({ title, body }: { title: string; body: string }) {
+function EmptyState({ title, body, children }: { title: string; body: string; children?: React.ReactNode }) {
   return (
     <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-hairline bg-card px-6 py-16 text-center">
       <Building2 className="h-8 w-8 text-muted-foreground" />
       <h3 className="mt-4 text-lg font-bold">{title}</h3>
       <p className="mt-1 max-w-sm text-sm text-muted-foreground">{body}</p>
+      {children && <div className="mt-6">{children}</div>}
     </div>
   );
 }

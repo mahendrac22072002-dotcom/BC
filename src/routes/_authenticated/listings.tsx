@@ -28,7 +28,7 @@ import {
 } from "@/components/ui/select";
 import { SignedImage } from "@/components/SignedImage";
 import { formatINR, relativeTime, errMessage } from "@/lib/format";
-import type { Database } from "@/integrations/supabase/types";
+import type { Database, ListingRow } from "@/types/database-compat";
 import { Building2, Loader2, MapPin, Plus, Trash2, Send } from "lucide-react";
 import { DealRequestModal } from "@/components/deals/DealRequestModal";
 
@@ -37,10 +37,10 @@ export const Route = createFileRoute("/_authenticated/listings")({
   component: ListingsPage,
 });
 
-type Listing = Database["public"]["Tables"]["listings"]["Row"];
-type PropertyType = Database["public"]["Enums"]["property_type"];
-type ListingType = Database["public"]["Enums"]["listing_type"];
-type ListingStatus = Database["public"]["Enums"]["listing_status"];
+type Listing = ListingRow;
+type PropertyType = "apartment" | "villa" | "plot" | "commercial" | "office" | "retail" | "warehouse" | "other";
+type ListingType = "sale" | "rent" | "lease";
+type ListingStatus = "draft" | "active" | "closed" | "rejected";
 
 const PROPERTY_TYPES: PropertyType[] = [
   "apartment", "villa", "plot", "commercial", "office", "retail", "warehouse", "other",
@@ -51,6 +51,7 @@ const LISTING_STATUSES: ListingStatus[] = ["draft", "active", "closed"];
 function ListingsPage() {
   const { user } = useAuth();
   const { data: profile } = useProfile();
+  const [open, setOpen] = useState(false);
   const isVerified = profile?.kyc_status === "verified";
   if (!user) {
     return <div className="flex-1 px-6 py-10 md:px-10 flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-muted-foreground" /></div>;
@@ -145,7 +146,7 @@ function MyListings({ userId }: { userId: string }) {
           <div className="p-5">
             <div className="flex items-start justify-between gap-3">
               <h3 className="font-bold leading-tight">{l.title}</h3>
-              <StatusPill status={l.status} />
+              <StatusPill status={(l.status as ListingStatus) || "draft"} />
             </div>
             <p className="mt-2 text-2xl font-extrabold tracking-tight">{formatINR(l.price)}</p>
             <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
@@ -157,7 +158,7 @@ function MyListings({ userId }: { userId: string }) {
 
             <div className="mt-4 flex flex-wrap gap-2">
               <Select
-                value={l.status}
+                value={l.status || undefined}
                 onValueChange={(v) => setStatus.mutate({ id: l.id, status: v as ListingStatus })}
               >
                 <SelectTrigger className="h-9 w-[120px]"><SelectValue /></SelectTrigger>
@@ -242,7 +243,7 @@ function ListingDialog({ onClose }: { onClose: () => void }) {
           bedrooms: v.bedrooms ? Number(v.bedrooms) : null,
           bathrooms: v.bathrooms ? Number(v.bathrooms) : null,
           area_sqft: v.area_sqft ? Number(v.area_sqft) : null,
-        })
+        } as import("@/types/database-compat").ListingInsert)
         .select("id")
         .single();
       if (error) throw error;
@@ -390,6 +391,7 @@ function StatusPill({ status }: { status: ListingStatus }) {
     draft: "border border-hairline text-muted-foreground",
     active: "bg-foreground text-background",
     closed: "border border-foreground",
+    rejected: "border border-red-500 text-red-500",
   };
   return (
     <span className={"shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest " + map[status]}>

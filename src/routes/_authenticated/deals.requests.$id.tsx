@@ -31,7 +31,7 @@ function DealRequestDetail() {
         .eq("id", id)
         .single();
       if (error) throw error;
-      return data;
+      return data as any;
     }
   });
 
@@ -51,7 +51,7 @@ function DealRequestDetail() {
           request_id: id,
           property_id: req!.property_id,
           status: "active"
-        })
+        } as any)
         .select("id")
         .single();
       if (roomErr) throw roomErr;
@@ -80,7 +80,7 @@ function DealRequestDetail() {
         event_type: "deal_created",
         actor_id: user?.id,
         description: "Deal Room automatically created after request acceptance."
-      });
+      } as any);
 
       return room.id;
     },

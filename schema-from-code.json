@@ -1,0 +1,2056 @@
+{
+  "tables": {
+    "contact_submissions": {
+      "columns": {
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "name": {
+          "type": "string",
+          "isNullable": false
+        },
+        "email": {
+          "type": "string",
+          "isNullable": false
+        },
+        "phone": {
+          "type": "string",
+          "isNullable": true
+        },
+        "message": {
+          "type": "string",
+          "isNullable": false
+        },
+        "status": {
+          "type": "string",
+          "isNullable": true
+        },
+        "notes": {
+          "type": "string",
+          "isNullable": true
+        }
+      },
+      "relations": []
+    },
+    "deal_rooms": {
+      "columns": {
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "deal_id": {
+          "type": "string",
+          "isNullable": true
+        }
+      },
+      "relations": [
+        {
+          "fkName": "deal_rooms_deal_id_fkey",
+          "column": "deal_id",
+          "targetTable": "deals",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "deal_room_members": {
+      "columns": {
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "room_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "user_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "role": {
+          "type": "string",
+          "isNullable": true
+        },
+        "listing_broker_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "requesting_broker_id": {
+          "type": "string",
+          "isNullable": true
+        }
+      },
+      "relations": []
+    },
+    "deal_requests": {
+      "columns": {
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "property_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "listing_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "request_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "status": {
+          "type": "string",
+          "isNullable": true
+        },
+        "listing_broker_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "requesting_broker_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "offer_price": {
+          "type": "number",
+          "isNullable": true
+        },
+        "commission_proposal": {
+          "type": "string",
+          "isNullable": true
+        },
+        "expected_closing_date": {
+          "type": "string",
+          "isNullable": true
+        },
+        "message": {
+          "type": "string",
+          "isNullable": true
+        },
+        "notes": {
+          "type": "string",
+          "isNullable": true
+        }
+      },
+      "relations": []
+    },
+    "deal_timeline": {
+      "columns": {
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "room_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "action": {
+          "type": "string",
+          "isNullable": false
+        },
+        "actor_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "details": {
+          "type": "Json",
+          "isNullable": true
+        }
+      },
+      "relations": []
+    },
+    "deal_messages": {
+      "columns": {
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "room_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "sender_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "body": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": []
+    },
+    "staff_roles": {
+      "columns": {
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "user_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "role": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": []
+    },
+    "activities": {
+      "columns": {
+        "body": {
+          "type": "string",
+          "isNullable": true
+        },
+        "completed_at": {
+          "type": "string",
+          "isNullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "deal_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "due_at": {
+          "type": "string",
+          "isNullable": true
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "lead_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "owner_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "subject": {
+          "type": "string",
+          "isNullable": false
+        },
+        "type": {
+          "type": "Database[\"public\"][\"Enums\"][\"activity_type\"]",
+          "isNullable": false
+        }
+      },
+      "relations": [
+        {
+          "fkName": "activities_deal_id_fkey",
+          "column": "deal_id",
+          "targetTable": "deals",
+          "targetColumn": "id"
+        },
+        {
+          "fkName": "activities_lead_id_fkey",
+          "column": "lead_id",
+          "targetTable": "leads",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "admin_audit_log": {
+      "columns": {
+        "action": {
+          "type": "string",
+          "isNullable": false
+        },
+        "actor_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "after": {
+          "type": "Json",
+          "isNullable": true
+        },
+        "before": {
+          "type": "Json",
+          "isNullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "metadata": {
+          "type": "Json",
+          "isNullable": true
+        },
+        "resource": {
+          "type": "string",
+          "isNullable": false
+        },
+        "resource_id": {
+          "type": "string",
+          "isNullable": true
+        }
+      },
+      "relations": []
+    },
+    "api_keys": {
+      "columns": {
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_by": {
+          "type": "string",
+          "isNullable": true
+        },
+        "hashed_key": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "last_used_at": {
+          "type": "string",
+          "isNullable": true
+        },
+        "name": {
+          "type": "string",
+          "isNullable": false
+        },
+        "prefix": {
+          "type": "string",
+          "isNullable": false
+        },
+        "revoked_at": {
+          "type": "string",
+          "isNullable": true
+        }
+      },
+      "relations": []
+    },
+    "blog_categories": {
+      "columns": {
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "description": {
+          "type": "string",
+          "isNullable": true
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "name": {
+          "type": "string",
+          "isNullable": false
+        },
+        "slug": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": []
+    },
+    "blog_post_tags": {
+      "columns": {
+        "post_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "tag_id": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": [
+        {
+          "fkName": "blog_post_tags_post_id_fkey",
+          "column": "post_id",
+          "targetTable": "blog_posts",
+          "targetColumn": "id"
+        },
+        {
+          "fkName": "blog_post_tags_tag_id_fkey",
+          "column": "tag_id",
+          "targetTable": "blog_tags",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "blog_posts": {
+      "columns": {
+        "author_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "body": {
+          "type": "string",
+          "isNullable": false
+        },
+        "category_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "cover_url": {
+          "type": "string",
+          "isNullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "excerpt": {
+          "type": "string",
+          "isNullable": true
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "published_at": {
+          "type": "string",
+          "isNullable": true
+        },
+        "reading_minutes": {
+          "type": "number",
+          "isNullable": false
+        },
+        "scheduled_at": {
+          "type": "string",
+          "isNullable": true
+        },
+        "seo_description": {
+          "type": "string",
+          "isNullable": true
+        },
+        "seo_title": {
+          "type": "string",
+          "isNullable": true
+        },
+        "slug": {
+          "type": "string",
+          "isNullable": false
+        },
+        "status": {
+          "type": "Database[\"public\"][\"Enums\"][\"blog_status\"]",
+          "isNullable": false
+        },
+        "title": {
+          "type": "string",
+          "isNullable": false
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": [
+        {
+          "fkName": "blog_posts_category_id_fkey",
+          "column": "category_id",
+          "targetTable": "blog_categories",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "blog_tags": {
+      "columns": {
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "name": {
+          "type": "string",
+          "isNullable": false
+        },
+        "slug": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": []
+    },
+    "connections": {
+      "columns": {
+        "addressee_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "message": {
+          "type": "string",
+          "isNullable": true
+        },
+        "requester_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "status": {
+          "type": "Database[\"public\"][\"Enums\"][\"connection_status\"]",
+          "isNullable": false
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": []
+    },
+    "conversations": {
+      "columns": {
+        "broker_a": {
+          "type": "string",
+          "isNullable": false
+        },
+        "broker_b": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "last_message_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "listing_id": {
+          "type": "string",
+          "isNullable": true
+        }
+      },
+      "relations": [
+        {
+          "fkName": "conversations_listing_id_fkey",
+          "column": "listing_id",
+          "targetTable": "listings",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "deals": {
+      "columns": {
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "expected_close_date": {
+          "type": "string",
+          "isNullable": true
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "lead_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "listing_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "notes": {
+          "type": "string",
+          "isNullable": true
+        },
+        "owner_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "probability": {
+          "type": "number",
+          "isNullable": true
+        },
+        "stage": {
+          "type": "Database[\"public\"][\"Enums\"][\"deal_stage\"]",
+          "isNullable": false
+        },
+        "title": {
+          "type": "string",
+          "isNullable": false
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "value": {
+          "type": "number",
+          "isNullable": true
+        }
+      },
+      "relations": [
+        {
+          "fkName": "deals_lead_id_fkey",
+          "column": "lead_id",
+          "targetTable": "leads",
+          "targetColumn": "id"
+        },
+        {
+          "fkName": "deals_listing_id_fkey",
+          "column": "listing_id",
+          "targetTable": "listings",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "form_submissions": {
+      "columns": {
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "form_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "ip_hash": {
+          "type": "string",
+          "isNullable": true
+        },
+        "payload": {
+          "type": "Json",
+          "isNullable": false
+        },
+        "submitted_by": {
+          "type": "string",
+          "isNullable": true
+        },
+        "submitter_email": {
+          "type": "string",
+          "isNullable": true
+        }
+      },
+      "relations": [
+        {
+          "fkName": "form_submissions_form_id_fkey",
+          "column": "form_id",
+          "targetTable": "forms",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "forms": {
+      "columns": {
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_by": {
+          "type": "string",
+          "isNullable": true
+        },
+        "description": {
+          "type": "string",
+          "isNullable": true
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "name": {
+          "type": "string",
+          "isNullable": false
+        },
+        "notify_email": {
+          "type": "string",
+          "isNullable": true
+        },
+        "published": {
+          "type": "boolean",
+          "isNullable": false
+        },
+        "schema": {
+          "type": "Json",
+          "isNullable": false
+        },
+        "slug": {
+          "type": "string",
+          "isNullable": false
+        },
+        "success_message": {
+          "type": "string",
+          "isNullable": false
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": []
+    },
+    "kyc_documents": {
+      "columns": {
+        "broker_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "doc_type": {
+          "type": "Database[\"public\"][\"Enums\"][\"kyc_doc_type\"]",
+          "isNullable": false
+        },
+        "file_path": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "reviewed_at": {
+          "type": "string",
+          "isNullable": true
+        },
+        "reviewer_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "reviewer_notes": {
+          "type": "string",
+          "isNullable": true
+        },
+        "status": {
+          "type": "Database[\"public\"][\"Enums\"][\"kyc_doc_status\"]",
+          "isNullable": false
+        },
+        "rejection_reason": {
+          "type": "string",
+          "isNullable": true
+        },
+        "version": {
+          "type": "number",
+          "isNullable": false
+        }
+      },
+      "relations": []
+    },
+    "leads": {
+      "columns": {
+        "budget_max": {
+          "type": "number",
+          "isNullable": true
+        },
+        "budget_min": {
+          "type": "number",
+          "isNullable": true
+        },
+        "city": {
+          "type": "string",
+          "isNullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "email": {
+          "type": "string",
+          "isNullable": true
+        },
+        "full_name": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "notes": {
+          "type": "string",
+          "isNullable": true
+        },
+        "owner_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "phone": {
+          "type": "string",
+          "isNullable": true
+        },
+        "requirement": {
+          "type": "string",
+          "isNullable": true
+        },
+        "source": {
+          "type": "Database[\"public\"][\"Enums\"][\"lead_source\"]",
+          "isNullable": false
+        },
+        "status": {
+          "type": "Database[\"public\"][\"Enums\"][\"lead_status\"]",
+          "isNullable": false
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": []
+    },
+    "listing_reports": {
+      "columns": {
+        "assigned_to": {
+          "type": "string",
+          "isNullable": true
+        },
+        "attachments": {
+          "type": "Json",
+          "isNullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "description": {
+          "type": "string",
+          "isNullable": true
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "listing_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "reason": {
+          "type": "string",
+          "isNullable": false
+        },
+        "reporter_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "resolution_notes": {
+          "type": "string",
+          "isNullable": true
+        },
+        "resolved_at": {
+          "type": "string",
+          "isNullable": true
+        },
+        "status": {
+          "type": "Database[\"public\"][\"Enums\"][\"listing_report_status\"]",
+          "isNullable": false
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": [
+        {
+          "fkName": "listing_reports_listing_id_fkey",
+          "column": "listing_id",
+          "targetTable": "listings",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "listing_status_history": {
+      "columns": {
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "listing_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "moderator_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "new_status": {
+          "type": "Database[\"public\"][\"Enums\"][\"listing_moderation_status\"]",
+          "isNullable": false
+        },
+        "notes": {
+          "type": "string",
+          "isNullable": true
+        },
+        "reason": {
+          "type": "string",
+          "isNullable": true
+        }
+      },
+      "relations": [
+        {
+          "fkName": "listing_status_history_listing_id_fkey",
+          "column": "listing_id",
+          "targetTable": "listings",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "listings": {
+      "columns": {
+        "area_sqft": {
+          "type": "number",
+          "isNullable": true
+        },
+        "bathrooms": {
+          "type": "number",
+          "isNullable": true
+        },
+        "bedrooms": {
+          "type": "number",
+          "isNullable": true
+        },
+        "broker_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "city": {
+          "type": "string",
+          "isNullable": false
+        },
+        "cover_image_url": {
+          "type": "string",
+          "isNullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "description": {
+          "type": "string",
+          "isNullable": true
+        },
+        "featured_until": {
+          "type": "string",
+          "isNullable": true
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "listing_type": {
+          "type": "Database[\"public\"][\"Enums\"][\"listing_type\"]",
+          "isNullable": false
+        },
+        "locality": {
+          "type": "string",
+          "isNullable": true
+        },
+        "moderation_notes": {
+          "type": "string",
+          "isNullable": true
+        },
+        "moderation_status": {
+          "type": "Database[\"public\"][\"Enums\"][\"listing_moderation_status\"]",
+          "isNullable": false
+        },
+        "price": {
+          "type": "number",
+          "isNullable": true
+        },
+        "property_type": {
+          "type": "Database[\"public\"][\"Enums\"][\"property_type\"]",
+          "isNullable": false
+        },
+        "status": {
+          "type": "Database[\"public\"][\"Enums\"][\"listing_status\"]",
+          "isNullable": false
+        },
+        "title": {
+          "type": "string",
+          "isNullable": false
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": []
+    },
+    "media_assets": {
+      "columns": {
+        "alt_text": {
+          "type": "string",
+          "isNullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "filename": {
+          "type": "string",
+          "isNullable": false
+        },
+        "folder": {
+          "type": "string",
+          "isNullable": false
+        },
+        "height": {
+          "type": "number",
+          "isNullable": true
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "mime_type": {
+          "type": "string",
+          "isNullable": false
+        },
+        "size_bytes": {
+          "type": "number",
+          "isNullable": false
+        },
+        "storage_path": {
+          "type": "string",
+          "isNullable": false
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "uploaded_by": {
+          "type": "string",
+          "isNullable": true
+        },
+        "width": {
+          "type": "number",
+          "isNullable": true
+        }
+      },
+      "relations": []
+    },
+    "messages": {
+      "columns": {
+        "body": {
+          "type": "string",
+          "isNullable": false
+        },
+        "conversation_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "sender_id": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": [
+        {
+          "fkName": "messages_conversation_id_fkey",
+          "column": "conversation_id",
+          "targetTable": "conversations",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "nav_items": {
+      "columns": {
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "href": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "label": {
+          "type": "string",
+          "isNullable": false
+        },
+        "location": {
+          "type": "Database[\"public\"][\"Enums\"][\"nav_location\"]",
+          "isNullable": false
+        },
+        "open_in_new_tab": {
+          "type": "boolean",
+          "isNullable": false
+        },
+        "parent_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "position": {
+          "type": "number",
+          "isNullable": false
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "visible": {
+          "type": "boolean",
+          "isNullable": false
+        }
+      },
+      "relations": [
+        {
+          "fkName": "nav_items_parent_id_fkey",
+          "column": "parent_id",
+          "targetTable": "nav_items",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "notifications": {
+      "columns": {
+        "body": {
+          "type": "string",
+          "isNullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "kind": {
+          "type": "Database[\"public\"][\"Enums\"][\"notification_kind\"]",
+          "isNullable": false
+        },
+        "link": {
+          "type": "string",
+          "isNullable": true
+        },
+        "metadata": {
+          "type": "Json",
+          "isNullable": false
+        },
+        "read_at": {
+          "type": "string",
+          "isNullable": true
+        },
+        "title": {
+          "type": "string",
+          "isNullable": false
+        },
+        "user_id": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": []
+    },
+    "page_revisions": {
+      "columns": {
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "editor_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "page_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "reason": {
+          "type": "string",
+          "isNullable": true
+        },
+        "snapshot": {
+          "type": "Json",
+          "isNullable": false
+        }
+      },
+      "relations": [
+        {
+          "fkName": "page_revisions_page_id_fkey",
+          "column": "page_id",
+          "targetTable": "pages",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "page_sections": {
+      "columns": {
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "page_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "position": {
+          "type": "number",
+          "isNullable": false
+        },
+        "props": {
+          "type": "Json",
+          "isNullable": false
+        },
+        "section_type": {
+          "type": "string",
+          "isNullable": false
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": [
+        {
+          "fkName": "page_sections_page_id_fkey",
+          "column": "page_id",
+          "targetTable": "pages",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "pages": {
+      "columns": {
+        "author_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "blocks": {
+          "type": "Json",
+          "isNullable": false
+        },
+        "body": {
+          "type": "string",
+          "isNullable": true
+        },
+        "canonical_url": {
+          "type": "string",
+          "isNullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "draft_blocks": {
+          "type": "Json",
+          "isNullable": true
+        },
+        "draft_body": {
+          "type": "string",
+          "isNullable": true
+        },
+        "featured": {
+          "type": "boolean",
+          "isNullable": false
+        },
+        "icon": {
+          "type": "string",
+          "isNullable": true
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "keywords": {
+          "type": "string",
+          "isNullable": true
+        },
+        "nav_order": {
+          "type": "number",
+          "isNullable": false
+        },
+        "og_image": {
+          "type": "string",
+          "isNullable": true
+        },
+        "page_type": {
+          "type": "string",
+          "isNullable": false
+        },
+        "parent_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "published_at": {
+          "type": "string",
+          "isNullable": true
+        },
+        "robots": {
+          "type": "string",
+          "isNullable": false
+        },
+        "scheduled_at": {
+          "type": "string",
+          "isNullable": true
+        },
+        "schema_jsonld": {
+          "type": "Json",
+          "isNullable": true
+        },
+        "seo_description": {
+          "type": "string",
+          "isNullable": true
+        },
+        "seo_title": {
+          "type": "string",
+          "isNullable": true
+        },
+        "show_in_footer": {
+          "type": "boolean",
+          "isNullable": false
+        },
+        "show_in_nav": {
+          "type": "boolean",
+          "isNullable": false
+        },
+        "slug": {
+          "type": "string",
+          "isNullable": false
+        },
+        "status": {
+          "type": "Database[\"public\"][\"Enums\"][\"page_status\"]",
+          "isNullable": false
+        },
+        "template": {
+          "type": "string",
+          "isNullable": false
+        },
+        "theme": {
+          "type": "Json",
+          "isNullable": false
+        },
+        "title": {
+          "type": "string",
+          "isNullable": false
+        },
+        "twitter_card": {
+          "type": "string",
+          "isNullable": false
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "visibility": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": [
+        {
+          "fkName": "pages_parent_id_fkey",
+          "column": "parent_id",
+          "targetTable": "pages",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "permissions": {
+      "columns": {
+        "action": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "description": {
+          "type": "string",
+          "isNullable": true
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "resource": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": []
+    },
+    "profiles": {
+      "columns": {
+        "avatar_url": {
+          "type": "string",
+          "isNullable": true
+        },
+        "city": {
+          "type": "string",
+          "isNullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "firm": {
+          "type": "string",
+          "isNullable": true
+        },
+        "full_name": {
+          "type": "string",
+          "isNullable": true
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "internal_notes": {
+          "type": "string",
+          "isNullable": true
+        },
+        "kyc_status": {
+          "type": "Database[\"public\"][\"Enums\"][\"kyc_status\"]",
+          "isNullable": false
+        },
+        "kyc_submitted_at": {
+          "type": "string",
+          "isNullable": true
+        },
+        "onboarding_kyc_submitted": {
+          "type": "boolean",
+          "isNullable": false
+        },
+        "onboarding_listing_published": {
+          "type": "boolean",
+          "isNullable": false
+        },
+        "onboarding_network_started": {
+          "type": "boolean",
+          "isNullable": false
+        },
+        "onboarding_profile_completed": {
+          "type": "boolean",
+          "isNullable": false
+        },
+        "phone": {
+          "type": "string",
+          "isNullable": true
+        },
+        "suspended_at": {
+          "type": "string",
+          "isNullable": true
+        },
+        "tags": {
+          "type": "string[]",
+          "isNullable": false
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": []
+    },
+    "role_permissions": {
+      "columns": {
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "permission_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "role": {
+          "type": "Database[\"public\"][\"Enums\"][\"app_role\"]",
+          "isNullable": false
+        }
+      },
+      "relations": [
+        {
+          "fkName": "role_permissions_permission_id_fkey",
+          "column": "permission_id",
+          "targetTable": "permissions",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "site_settings": {
+      "columns": {
+        "brand_name": {
+          "type": "string",
+          "isNullable": false
+        },
+        "contact_phone": {
+          "type": "string",
+          "isNullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "footer_html": {
+          "type": "string",
+          "isNullable": true
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "seo_description": {
+          "type": "string",
+          "isNullable": true
+        },
+        "seo_title": {
+          "type": "string",
+          "isNullable": true
+        },
+        "singleton": {
+          "type": "boolean",
+          "isNullable": false
+        },
+        "social_links": {
+          "type": "Json",
+          "isNullable": false
+        },
+        "support_email": {
+          "type": "string",
+          "isNullable": true
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": []
+    },
+    "subscription_plans": {
+      "columns": {
+        "code": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "description": {
+          "type": "string",
+          "isNullable": true
+        },
+        "features": {
+          "type": "Json",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "interval": {
+          "type": "string",
+          "isNullable": false
+        },
+        "is_active": {
+          "type": "boolean",
+          "isNullable": false
+        },
+        "listing_limit": {
+          "type": "number",
+          "isNullable": true
+        },
+        "name": {
+          "type": "string",
+          "isNullable": false
+        },
+        "price_inr": {
+          "type": "number",
+          "isNullable": false
+        },
+        "sort_order": {
+          "type": "number",
+          "isNullable": false
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "badge": {
+          "type": "string",
+          "isNullable": true
+        },
+        "cta_text": {
+          "type": "string",
+          "isNullable": true
+        },
+        "cta_url": {
+          "type": "string",
+          "isNullable": true
+        },
+        "trial_days": {
+          "type": "number",
+          "isNullable": true
+        },
+        "stripe_product_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "razorpay_plan_id": {
+          "type": "string",
+          "isNullable": true
+        },
+        "highlighted": {
+          "type": "boolean",
+          "isNullable": true
+        }
+      },
+      "relations": []
+    },
+    "subscriptions": {
+      "columns": {
+        "canceled_at": {
+          "type": "string",
+          "isNullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "current_period_end": {
+          "type": "string",
+          "isNullable": true
+        },
+        "external_ref": {
+          "type": "string",
+          "isNullable": true
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "plan_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "started_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "status": {
+          "type": "Database[\"public\"][\"Enums\"][\"subscription_status\"]",
+          "isNullable": false
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "user_id": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": [
+        {
+          "fkName": "subscriptions_plan_id_fkey",
+          "column": "plan_id",
+          "targetTable": "subscription_plans",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "support_attachments": {
+      "columns": {
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "file_path": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "message_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "mime_type": {
+          "type": "string",
+          "isNullable": true
+        },
+        "size_bytes": {
+          "type": "number",
+          "isNullable": true
+        }
+      },
+      "relations": [
+        {
+          "fkName": "support_attachments_message_id_fkey",
+          "column": "message_id",
+          "targetTable": "support_messages",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "support_internal_notes": {
+      "columns": {
+        "author_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "body": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "thread_id": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": [
+        {
+          "fkName": "support_internal_notes_thread_id_fkey",
+          "column": "thread_id",
+          "targetTable": "support_threads",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "support_messages": {
+      "columns": {
+        "body": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "sender_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "thread_id": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": [
+        {
+          "fkName": "support_messages_thread_id_fkey",
+          "column": "thread_id",
+          "targetTable": "support_threads",
+          "targetColumn": "id"
+        }
+      ]
+    },
+    "support_threads": {
+      "columns": {
+        "assigned_to": {
+          "type": "string",
+          "isNullable": true
+        },
+        "closed_at": {
+          "type": "string",
+          "isNullable": true
+        },
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "last_message_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "opener_id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "priority": {
+          "type": "Database[\"public\"][\"Enums\"][\"support_priority\"]",
+          "isNullable": false
+        },
+        "status": {
+          "type": "Database[\"public\"][\"Enums\"][\"support_status\"]",
+          "isNullable": false
+        },
+        "subject": {
+          "type": "string",
+          "isNullable": false
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": []
+    },
+    "user_roles": {
+      "columns": {
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "role": {
+          "type": "Database[\"public\"][\"Enums\"][\"app_role\"]",
+          "isNullable": false
+        },
+        "user_id": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": []
+    },
+    "webhooks": {
+      "columns": {
+        "created_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "created_by": {
+          "type": "string",
+          "isNullable": true
+        },
+        "events": {
+          "type": "string[]",
+          "isNullable": false
+        },
+        "id": {
+          "type": "string",
+          "isNullable": false
+        },
+        "is_active": {
+          "type": "boolean",
+          "isNullable": false
+        },
+        "name": {
+          "type": "string",
+          "isNullable": false
+        },
+        "secret": {
+          "type": "string",
+          "isNullable": true
+        },
+        "updated_at": {
+          "type": "string",
+          "isNullable": false
+        },
+        "url": {
+          "type": "string",
+          "isNullable": false
+        }
+      },
+      "relations": []
+    }
+  },
+  "enums": {
+    "app_role": [
+      "broker",
+      "staff",
+      "admin"
+    ],
+    "blog_status": [
+      "draft",
+      "scheduled",
+      "published",
+      "archived"
+    ],
+    "connection_status": [
+      "pending",
+      "accepted",
+      "declined",
+      "prospect",
+      "site_visit",
+      "offer",
+      "agreement",
+      "closed_won",
+      "closed_lost"
+    ],
+    "kyc_doc_status": [
+      "uploaded",
+      "approved",
+      "rejected",
+      "aadhaar",
+      "pan",
+      "rera",
+      "license",
+      "other",
+      "broker_photo",
+      "visiting_card",
+      "office_photo"
+    ],
+    "kyc_status": [
+      "pending",
+      "in_review",
+      "verified",
+      "rejected",
+      "website",
+      "referral",
+      "marketplace",
+      "cold_call",
+      "social",
+      "event",
+      "other",
+      "new",
+      "contacted",
+      "qualified",
+      "proposal",
+      "negotiation",
+      "won",
+      "lost",
+      "pending",
+      "approved",
+      "rejected",
+      "hidden",
+      "changes_requested",
+      "open",
+      "assigned",
+      "resolved",
+      "dismissed",
+      "escalated"
+    ],
+    "listing_status": [
+      "draft",
+      "active",
+      "closed"
+    ],
+    "listing_type": [
+      "sale",
+      "rent",
+      "lease"
+    ],
+    "nav_location": [
+      "header",
+      "footer",
+      "kyc_approved",
+      "kyc_rejected",
+      "listing_approved",
+      "listing_rejected",
+      "listing_hidden",
+      "listing_featured",
+      "support_reply",
+      "subscription_expiring",
+      "system_announcement",
+      "report_update"
+    ],
+    "page_status": [
+      "draft",
+      "published",
+      "scheduled",
+      "archived",
+      "apartment",
+      "villa",
+      "plot",
+      "commercial",
+      "office",
+      "retail",
+      "warehouse",
+      "other",
+      "trialing",
+      "active",
+      "past_due",
+      "canceled",
+      "expired"
+    ],
+    "support_priority": [
+      "low",
+      "normal",
+      "high",
+      "urgent"
+    ],
+    "support_status": [
+      "open",
+      "pending",
+      "resolved",
+      "closed"
+    ]
+  }
+}

@@ -107,7 +107,7 @@ function CRMPage() {
         value: dealForm.value ? Number(dealForm.value) : null,
         expected_close_date: dealForm.expected_close_date || null,
       };
-      const { error } = await supabase.from("deals").insert(payload);
+      const { error } = await supabase.from("deals").insert(payload as any);
       if (error) throw error;
     },
     onSuccess: () => {

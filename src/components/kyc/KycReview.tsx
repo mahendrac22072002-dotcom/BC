@@ -310,7 +310,7 @@ export function KycReview({ mode }: { mode: "admin" | "staff" }) {
                                 <FileText className="h-4 w-4 text-slate-400" />
                                 <div className="min-w-0 flex-1">
                                   <p className="truncate text-sm font-semibold text-slate-900">
-                                    {DOC_LABEL[d.doc_type] ?? d.doc_type}
+                                    {DOC_LABEL[d.doc_type || ""] ?? d.doc_type}
                                   </p>
                                   <p className="truncate text-xs text-slate-500">
                                     Uploaded {relativeTime(d.created_at)}
@@ -354,7 +354,7 @@ export function KycReview({ mode }: { mode: "admin" | "staff" }) {
                                   className="text-red-700 hover:bg-red-50"
                                   onClick={() => {
                                     const reason = prompt(
-                                      `Why is ${DOC_LABEL[d.doc_type] ?? d.doc_type} rejected?`,
+                                      `Why is ${DOC_LABEL[d.doc_type || ""] ?? d.doc_type} rejected?`,
                                     );
                                     if (reason == null) return;
                                     decide.mutate({
@@ -374,7 +374,7 @@ export function KycReview({ mode }: { mode: "admin" | "staff" }) {
                                   className="text-amber-700 hover:bg-amber-50"
                                   onClick={() => {
                                     const reason = prompt(
-                                      `Why does ${DOC_LABEL[d.doc_type] ?? d.doc_type} need to be re-uploaded?`,
+                                      `Why does ${DOC_LABEL[d.doc_type || ""] ?? d.doc_type} need to be re-uploaded?`,
                                     );
                                     if (reason == null) return;
                                     decide.mutate({

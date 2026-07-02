@@ -90,7 +90,7 @@ function Dashboard() {
   const profileComplete =
     !!profile?.full_name?.trim() && !!profile?.firm?.trim() && !!profile?.city?.trim();
 
-  type StepHref = "/settings" | "/kyc" | "/listings" | "/network";
+  type StepHref = any;
   const steps: Array<{
     title: string;
     description: string;

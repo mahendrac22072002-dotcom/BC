@@ -67,7 +67,7 @@ function KycPage() {
         doc_type: type,
         file_path: path,
         status: "uploaded",
-      });
+      } as any);
       if (ins.error) throw ins.error;
 
       // Submit-for-review marker on profile

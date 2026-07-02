@@ -224,7 +224,7 @@ function AdminDashboard() {
                       <KycPill status={p.kyc_status} />
                     </td>
                     <td className="px-5 py-3 text-right text-xs text-slate-500">
-                      {new Date(p.created_at).toLocaleDateString()}
+                      {p.created_at ? new Date(p.created_at).toLocaleDateString() : ''}
                     </td>
                   </tr>
                 ))}
@@ -249,7 +249,7 @@ function AdminDashboard() {
                   <div className="text-xs text-slate-500">
                     {a.resource}
                     {a.resource_id ? ` · ${a.resource_id.slice(0, 8)}` : ""} ·{" "}
-                    {new Date(a.created_at).toLocaleString()}
+                    {a.created_at ? new Date(a.created_at).toLocaleString() : ''}
                   </div>
                 </li>
               ))}
@@ -272,7 +272,7 @@ function AdminDashboard() {
                   <div>
                     <div className="font-medium text-slate-900">{c.name} <span className="text-slate-500 font-normal ml-2">{c.subject}</span></div>
                     <div className="text-xs text-slate-500">
-                      {new Date(c.created_at).toLocaleString()}
+                      {c.created_at ? new Date(c.created_at).toLocaleString() : ''}
                     </div>
                   </div>
                   <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide

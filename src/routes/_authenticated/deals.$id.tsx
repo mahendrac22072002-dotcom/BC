@@ -38,7 +38,7 @@ function DealRoomDetail() {
         .eq("id", id)
         .single();
       if (error) throw error;
-      return data;
+      return data as any;
     }
   });
 
@@ -51,7 +51,7 @@ function DealRoomDetail() {
         .eq("room_id", id)
         .order("created_at", { ascending: true });
       if (error) throw error;
-      return data;
+      return data as any[];
     },
     refetchInterval: 3000 // Simple polling for now
   });
@@ -159,7 +159,7 @@ function DealRoomDetail() {
         <div className="p-6 border-b">
           <h3 className="font-bold uppercase tracking-widest text-[10px] text-muted-foreground mb-4">Participants</h3>
           <div className="space-y-4">
-            {room.members?.map(m => (
+            {room.members?.map((m: any) => (
               <div key={m.user.id} className="flex items-center justify-between group">
                 <div className="flex items-center gap-3">
                   <div className="h-8 w-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold shrink-0">

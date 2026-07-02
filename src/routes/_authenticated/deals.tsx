@@ -29,7 +29,7 @@ function DealsLayout() {
         .eq("status", "pending")
         .order("created_at", { ascending: false });
       if (error) throw error;
-      return data;
+      return data as any[];
     }
   });
 
@@ -49,7 +49,7 @@ function DealsLayout() {
         `)
         .eq("user_id", user?.id || "00000000-0000-0000-0000-000000000000");
       if (error) throw error;
-      return data;
+      return data as any[];
     },
     enabled: !!user,
   });
@@ -88,7 +88,8 @@ function DealsLayout() {
                   return (
                     <Link
                       key={req.id}
-                      to={`/deals/requests/${req.id}`}
+                      to={"/deals/requests/$id"}
+                      params={{ id: req.id }}
                       className="block p-3 bg-white border rounded-lg hover:border-slate-400 transition-colors"
                     >
                       <div className="flex justify-between items-start mb-1">
@@ -97,8 +98,8 @@ function DealsLayout() {
                         </span>
                         <span className="text-[10px] text-muted-foreground">{relativeTime(req.created_at)}</span>
                       </div>
-                      <div className="font-semibold text-sm truncate">{req.property.title}</div>
-                      <div className="text-xs text-muted-foreground truncate">with {otherBroker.full_name}</div>
+                      <div className="font-semibold text-sm truncate">{req.property?.title || "Property"}</div>
+                      <div className="text-xs text-muted-foreground truncate">with {otherBroker?.full_name || "Broker"}</div>
                     </Link>
                   );
                 })}
@@ -127,17 +128,18 @@ function DealsLayout() {
                   return (
                     <Link
                       key={room.id}
-                      to={`/deals/${room.id}`}
+                      to={"/deals/$id"}
+                      params={{ id: room.id }}
                       className="block p-3 rounded-lg hover:bg-slate-200/50 transition-colors"
                       activeProps={{ className: "bg-slate-200" }}
                     >
-                      <div className="font-semibold text-sm truncate">{room.property.title}</div>
+                      <div className="font-semibold text-sm truncate">{room.property?.title || "Property"}</div>
                       <div className="flex items-center gap-2 mt-1">
                         <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider
                           ${room.status === 'active' ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-700'}`}>
                           {room.status}
                         </span>
-                        <span className="text-xs text-muted-foreground truncate">{room.property.city}</span>
+                        <span className="text-xs text-muted-foreground truncate">{room.property?.city || ""}</span>
                       </div>
                     </Link>
                   );

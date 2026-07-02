@@ -19,6 +19,9 @@ export type BlockType =
   | "team"
   | "timeline"
   | "contact-form"
+  | "grid"
+  | "columns"
+  | "button"
   | "blog-list";
 
 export interface PageBlock {

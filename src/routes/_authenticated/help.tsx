@@ -298,7 +298,7 @@ function HelpCenter() {
                             <span
                               className={cn(
                                 "rounded-full px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider",
-                                PRIORITY_COLOR[t.priority],
+                                PRIORITY_COLOR[t.priority as keyof typeof PRIORITY_COLOR],
                               )}
                             >
                               {t.priority}
@@ -417,7 +417,7 @@ function Conversation({
             <span
               className={cn(
                 "rounded-full px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider",
-                PRIORITY_COLOR[thread.priority],
+                PRIORITY_COLOR[thread.priority as keyof typeof PRIORITY_COLOR],
               )}
             >
               {thread.priority}

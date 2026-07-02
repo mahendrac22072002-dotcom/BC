@@ -53,7 +53,10 @@ function VisualBuilder() {
                 </span>
                 {/* Visual builder canvas route to be implemented */}
                 <Button size="sm" variant="secondary" asChild className="opacity-0 transition-opacity group-hover:opacity-100">
-                  <Link to={`/admin/cms/pages/${page.id}`}>
+                  <Link
+                    to={"/admin/cms/pages/$id"}
+                    params={{ id: page.id }}
+                  >
                     <Edit2 className="mr-1.5 h-3 w-3" /> Edit Visual
                   </Link>
                 </Button>

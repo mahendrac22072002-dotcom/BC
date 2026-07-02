@@ -8,14 +8,14 @@ export function BlogListBlock({ data }: { data?: any }) {
   const { data: posts, isPending } = useQuery({
     queryKey: ["public", "blog-posts"],
     queryFn: async () => {
-      const { data, error } = await supabase
+      const { data: qData, error } = await supabase
         .from("blog_posts")
         .select("*")
         .eq("status", "published")
         .order("published_at", { ascending: false })
         .limit(data?.limit || 50);
       if (error) throw error;
-      return data ?? [];
+      return qData ?? [];
     },
   });
 

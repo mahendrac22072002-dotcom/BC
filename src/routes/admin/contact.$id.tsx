@@ -90,7 +90,7 @@ function ContactDetail() {
               <span className="font-semibold text-black">{sub.name}</span>
               <span>&lt;{sub.email}&gt;</span>
               <span>•</span>
-              <span>{new Date(sub.created_at).toLocaleString()}</span>
+              <span>{sub.created_at ? new Date(sub.created_at).toLocaleString() : ''}</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
